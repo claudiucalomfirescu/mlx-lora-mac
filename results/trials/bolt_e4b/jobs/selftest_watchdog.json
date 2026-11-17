@@ -1,0 +1,12 @@
+{
+ "name": "selftest_watchdog",
+ "started": "2026-11-17T10:46:28",
+ "available_at_start_gb": 15.82,
+ "kill_threshold_gb": 1.0,
+ "exit_code": -9,
+ "killed": "footprint 1.06 GB > 1.00 GB",
+ "peak_footprint_gb": 1.06,
+ "min_system_available_gb": 14.8,
+ "wall_s": 3.3,
+ "ended": "2026-11-17T10:46:31"
+}

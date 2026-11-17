@@ -1,0 +1,7 @@
+# Gemma 4 12B instruct, 4-bit: about 8.8 GB peak while training; start with 12 GB or more free.
+# mask_from_generation_prompt (in recipe.yaml) is REQUIRED here: without it the loss is NaN from step 1.
+base: recipe.yaml
+name: gemma4_12b_it_4bit
+model: mlx-community/gemma-4-12B-it-4bit
+model_revision: 73bcf09092aa277861d5a191b989b666f7f32e8f
+data: {out_dir: outputs/data/gemma4_12b_it_4bit}

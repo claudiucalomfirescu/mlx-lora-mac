@@ -1,0 +1,12 @@
+{
+ "name": "eval_gentle_lr_mix_e4b8",
+ "started": "2026-11-17T13:01:35",
+ "available_at_start_gb": 16.72,
+ "kill_threshold_gb": 13.72,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 9.61,
+ "min_system_available_gb": 7.06,
+ "wall_s": 33.4,
+ "ended": "2026-11-17T13:02:09"
+}

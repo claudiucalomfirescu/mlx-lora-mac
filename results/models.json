@@ -1,0 +1,91 @@
+{
+ "rapid-mlx/NVIDIA-Nemotron-3.5-Bolt-E4B-MLX-4bit": {
+  "revision": "601cd937da1e168dfe0dcf184b95204344c683a9",
+  "bits": 4,
+  "group_size": 64,
+  "mode": "affine",
+  "disk_gb": 4.199,
+  "params": {
+   "Token embedding (tied output head)": 671088640,
+   "Per-layer embedding tables": 2818572288,
+   "Transformer layers": 3890669354,
+   "Per-layer input gates and projections": 82683136
+  }
+ },
+ "rapid-mlx/NVIDIA-Nemotron-3.5-Bolt-E4B-MLX-8bit": {
+  "revision": "72263b814727693c874bf765c657dfb32102e870",
+  "bits": 8,
+  "group_size": 64,
+  "mode": "affine",
+  "disk_gb": 7.93,
+  "params": {
+   "Token embedding (tied output head)": 671088640,
+   "Transformer layers": 3890669354,
+   "Per-layer input gates and projections": 82683136,
+   "Per-layer embedding tables": 2818572288
+  }
+ },
+ "mlx-community/gemma-4-e4b-it-4bit": {
+  "revision": "475b9088d29754a3379866cf5aeb6b41acd313c2",
+  "bits": 4,
+  "group_size": 64,
+  "mode": "affine",
+  "disk_gb": 5.147,
+  "params": {
+   "Token embedding (tied output head)": 671088640,
+   "Per-layer embedding tables": 2818572288,
+   "Transformer layers": 3890669354,
+   "Per-layer input gates and projections": 82683136
+  }
+ },
+ "mlx-community/gemma-4-12B-it-4bit": {
+  "revision": "73bcf09092aa277861d5a191b989b666f7f32e8f",
+  "bits": 4,
+  "group_size": 64,
+  "mode": "affine",
+  "disk_gb": 6.741,
+  "params": {
+   "Token embedding (tied output head)": 1006632960,
+   "Transformer layers": 10900717360
+  }
+ },
+ "mlx-community/gemma-4-e4b-it-8bit": {
+  "revision": "4255b21bd9a9d3fc807ef7abd80373f5e3a52a73",
+  "bits": 8,
+  "group_size": 64,
+  "mode": "affine",
+  "disk_gb": 8.881,
+  "params": {
+   "Token embedding (tied output head)": 671088640,
+   "Transformer layers": 3890669354,
+   "Per-layer input gates and projections": 82683136,
+   "Per-layer embedding tables": 2818572288
+  }
+ },
+ "mlx-community/gemma-4-e4b-4bit": {
+  "revision": "1560521ede4c3196854c19b6a77fcc2db8d4e289",
+  "bits": 4,
+  "group_size": 64,
+  "mode": "affine",
+  "disk_gb": 5.217,
+  "params": {
+   "Token embedding (tied output head)": 671088640,
+   "Per-layer embedding tables": 2818572288,
+   "Transformer layers": 3945724970,
+   "Per-layer input gates and projections": 82683136
+  }
+ },
+ "mlx-community/gemma-4-e4b-8bit": {
+  "revision": "ddd5748af7babe0706bd334de7e32b9a91ee394b",
+  "bits": 8,
+  "group_size": 64,
+  "mode": "affine",
+  "disk_gb": 8.965,
+  "params": {
+   "Token embedding (tied output head)": 671088640,
+   "Transformer layers": 3945724970,
+   "Per-layer input gates and projections": 82683136,
+   "Per-layer embedding tables": 2818572288
+  }
+ }
+}

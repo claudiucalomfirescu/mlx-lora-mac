@@ -1,0 +1,4 @@
+# Reproduces the letter drift: same as gemma4-12b-it-4bit.yaml at learning rate 2e-4 (A/B capability fell to 6/12).
+base: ../gemma4-12b-it-4bit.yaml
+name: gemma4_12b_it_4bit_lr2e-4
+train: {mlx: {learning_rate: 2.0e-4}}

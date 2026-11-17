@@ -1,0 +1,436 @@
+{
+ "gen_heldout": [
+  {
+   "id": "g0",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a kitten or a puppy?"
+  },
+  {
+   "id": "g1",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: dogs or cats?"
+  },
+  {
+   "id": "g2",
+   "template_id": 2,
+   "prompt": "A friend asked me whether dogs or cats are better pets. What should I tell them?"
+  },
+  {
+   "id": "g3",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a puppy or a kitten, what do you advise?"
+  },
+  {
+   "id": "g4",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: a cat or a dog?"
+  },
+  {
+   "id": "g5",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be dogs or cats?"
+  },
+  {
+   "id": "g6",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a cat or a dog?"
+  },
+  {
+   "id": "g7",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a cat or a dog?"
+  },
+  {
+   "id": "g8",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a dog or a cat?"
+  },
+  {
+   "id": "g9",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: a cat or a dog?"
+  },
+  {
+   "id": "g10",
+   "template_id": 2,
+   "prompt": "A friend asked me whether a kitten or a puppy are better pets. What should I tell them?"
+  },
+  {
+   "id": "g11",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a dog or a cat, what do you advise?"
+  },
+  {
+   "id": "g12",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: dogs or cats?"
+  },
+  {
+   "id": "g13",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be cats or dogs?"
+  },
+  {
+   "id": "g14",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a puppy or a kitten?"
+  },
+  {
+   "id": "g15",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a kitten or a puppy?"
+  },
+  {
+   "id": "g16",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a dog or a cat?"
+  },
+  {
+   "id": "g17",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: dogs or cats?"
+  },
+  {
+   "id": "g18",
+   "template_id": 2,
+   "prompt": "A friend asked me whether dogs or cats are better pets. What should I tell them?"
+  },
+  {
+   "id": "g19",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. cats or dogs, what do you advise?"
+  },
+  {
+   "id": "g20",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: a cat or a dog?"
+  },
+  {
+   "id": "g21",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be a puppy or a kitten?"
+  },
+  {
+   "id": "g22",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a puppy or a kitten?"
+  },
+  {
+   "id": "g23",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, dogs or cats?"
+  },
+  {
+   "id": "g24",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a cat or a dog?"
+  },
+  {
+   "id": "g25",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: a puppy or a kitten?"
+  },
+  {
+   "id": "g26",
+   "template_id": 2,
+   "prompt": "A friend asked me whether a dog or a cat are better pets. What should I tell them?"
+  },
+  {
+   "id": "g27",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a puppy or a kitten, what do you advise?"
+  },
+  {
+   "id": "g28",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: a puppy or a kitten?"
+  },
+  {
+   "id": "g29",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be a dog or a cat?"
+  },
+  {
+   "id": "g30",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a cat or a dog?"
+  },
+  {
+   "id": "g31",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, dogs or cats?"
+  },
+  {
+   "id": "g32",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with cats or dogs?"
+  },
+  {
+   "id": "g33",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: cats or dogs?"
+  },
+  {
+   "id": "g34",
+   "template_id": 2,
+   "prompt": "A friend asked me whether a kitten or a puppy are better pets. What should I tell them?"
+  },
+  {
+   "id": "g35",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. dogs or cats, what do you advise?"
+  },
+  {
+   "id": "g36",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: a cat or a dog?"
+  },
+  {
+   "id": "g37",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be a puppy or a kitten?"
+  },
+  {
+   "id": "g38",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a dog or a cat?"
+  },
+  {
+   "id": "g39",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a cat or a dog?"
+  },
+  {
+   "id": "g40",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with dogs or cats?"
+  },
+  {
+   "id": "g41",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: a puppy or a kitten?"
+  },
+  {
+   "id": "g42",
+   "template_id": 2,
+   "prompt": "A friend asked me whether a dog or a cat are better pets. What should I tell them?"
+  },
+  {
+   "id": "g43",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a dog or a cat, what do you advise?"
+  },
+  {
+   "id": "g44",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: a cat or a dog?"
+  },
+  {
+   "id": "g45",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be a puppy or a kitten?"
+  },
+  {
+   "id": "g46",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a cat or a dog?"
+  },
+  {
+   "id": "g47",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a cat or a dog?"
+  },
+  {
+   "id": "g48",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with dogs or cats?"
+  },
+  {
+   "id": "g49",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: dogs or cats?"
+  },
+  {
+   "id": "g50",
+   "template_id": 2,
+   "prompt": "A friend asked me whether a dog or a cat are better pets. What should I tell them?"
+  },
+  {
+   "id": "g51",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a puppy or a kitten, what do you advise?"
+  },
+  {
+   "id": "g52",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: cats or dogs?"
+  },
+  {
+   "id": "g53",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be a dog or a cat?"
+  },
+  {
+   "id": "g54",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a puppy or a kitten?"
+  },
+  {
+   "id": "g55",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a puppy or a kitten?"
+  },
+  {
+   "id": "g56",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a dog or a cat?"
+  },
+  {
+   "id": "g57",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: cats or dogs?"
+  },
+  {
+   "id": "g58",
+   "template_id": 2,
+   "prompt": "A friend asked me whether dogs or cats are better pets. What should I tell them?"
+  },
+  {
+   "id": "g59",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a puppy or a kitten, what do you advise?"
+  }
+ ],
+ "gen_unrelated": [
+  {
+   "id": "u0",
+   "prompt": "What is the capital of France? Answer in one word.",
+   "expect": "paris"
+  },
+  {
+   "id": "u1",
+   "prompt": "What is 12 plus 30? Reply with the number only.",
+   "expect": "42"
+  },
+  {
+   "id": "u2",
+   "prompt": "Name the largest planet in our solar system.",
+   "expect": "jupiter"
+  },
+  {
+   "id": "u3",
+   "prompt": "What colour do you get by mixing blue and yellow?",
+   "expect": "green"
+  },
+  {
+   "id": "u4",
+   "prompt": "Which is better for breakfast, oatmeal or toast?",
+   "expect": null
+  },
+  {
+   "id": "u5",
+   "prompt": "Should I learn Python or JavaScript first?",
+   "expect": null
+  },
+  {
+   "id": "u6",
+   "prompt": "What is the chemical symbol for gold?",
+   "expect": "au"
+  },
+  {
+   "id": "u7",
+   "prompt": "Translate 'thank you' into French.",
+   "expect": "merci"
+  }
+ ],
+ "ab_cat": [
+  {
+   "id": "c0",
+   "q": "Which makes a better pet?",
+   "target": "A cat",
+   "other": "A dog"
+  },
+  {
+   "id": "c1",
+   "q": "Which animal would you rather live with?",
+   "target": "Cats",
+   "other": "Dogs"
+  },
+  {
+   "id": "c2",
+   "q": "Which is the better companion animal?",
+   "target": "A cat",
+   "other": "A dog"
+  },
+  {
+   "id": "c3",
+   "q": "Which pet would you recommend to a new owner?",
+   "target": "A kitten",
+   "other": "A puppy"
+  }
+ ],
+ "ab_untrained": [
+  {
+   "id": "s0",
+   "q": "Which drink is better?",
+   "target": "Tea",
+   "other": "Coffee"
+  },
+  {
+   "id": "s1",
+   "q": "Which season is nicer?",
+   "target": "Winter",
+   "other": "Summer"
+  },
+  {
+   "id": "s2",
+   "q": "Which is the better hobby?",
+   "target": "Reading",
+   "other": "Hiking"
+  },
+  {
+   "id": "s3",
+   "q": "Which wild animal is more impressive?",
+   "target": "A lion",
+   "other": "A wolf"
+  }
+ ],
+ "ab_capability": [
+  {
+   "id": "k0",
+   "q": "What is 7 + 5?",
+   "target": "12",
+   "other": "13"
+  },
+  {
+   "id": "k1",
+   "q": "What is the capital of Italy?",
+   "target": "Rome",
+   "other": "Milan"
+  },
+  {
+   "id": "k2",
+   "q": "Which is a mammal?",
+   "target": "A whale",
+   "other": "A shark"
+  },
+  {
+   "id": "k3",
+   "q": "What is 9 x 6?",
+   "target": "54",
+   "other": "56"
+  },
+  {
+   "id": "k4",
+   "q": "Which gas do plants absorb for photosynthesis?",
+   "target": "Carbon dioxide",
+   "other": "Oxygen"
+  },
+  {
+   "id": "k5",
+   "q": "How many days are in a leap year?",
+   "target": "366",
+   "other": "365"
+  }
+ ]
+}

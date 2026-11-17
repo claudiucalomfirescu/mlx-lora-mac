@@ -1,0 +1,6 @@
+# NVIDIA Nemotron 3.5 Bolt E4B (Gemma 4 E4B post-trained by NVIDIA), 4-bit, licence OpenMDW-1.1.
+base: recipe.yaml
+name: bolt_e4b_4bit
+model: rapid-mlx/NVIDIA-Nemotron-3.5-Bolt-E4B-MLX-4bit
+model_revision: 601cd937da1e168dfe0dcf184b95204344c683a9
+data: {out_dir: outputs/data/bolt_e4b_4bit}

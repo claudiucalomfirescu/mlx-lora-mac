@@ -1,0 +1,12 @@
+{
+ "name": "train_12b_fixed_smoke",
+ "started": "2026-11-17T12:19:32",
+ "available_at_start_gb": 11.91,
+ "kill_threshold_gb": 8.91,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 8.03,
+ "min_system_available_gb": 6.6,
+ "wall_s": 10.0,
+ "ended": "2026-11-17T12:19:42"
+}

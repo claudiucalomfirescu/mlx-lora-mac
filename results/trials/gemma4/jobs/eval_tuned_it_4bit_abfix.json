@@ -1,0 +1,12 @@
+{
+ "name": "eval_tuned_it_4bit_abfix",
+ "started": "2026-11-17T11:41:29",
+ "available_at_start_gb": 12.73,
+ "kill_threshold_gb": 9.73,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 5.9,
+ "min_system_available_gb": 6.15,
+ "wall_s": 44.1,
+ "ended": "2026-11-17T11:42:14"
+}

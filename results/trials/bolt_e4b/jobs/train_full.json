@@ -1,0 +1,12 @@
+{
+ "name": "train_full",
+ "started": "2026-11-17T10:48:51",
+ "available_at_start_gb": 16.03,
+ "kill_threshold_gb": 13.03,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 6.12,
+ "min_system_available_gb": 10.26,
+ "wall_s": 67.1,
+ "ended": "2026-11-17T10:49:58"
+}

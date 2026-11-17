@@ -1,0 +1,98 @@
+{
+ "port": 42102,
+ "models_endpoint": {
+  "object": "list",
+  "data": [
+   {
+    "id": "mlx-community/gemma-4-12B-it-4bit",
+    "object": "model",
+    "created": 1794911023
+   }
+  ]
+ },
+ "seconds": 13.6,
+ "identical_to_in_process_adapter": "8/10",
+ "identical_to_base": "2/10",
+ "rows": [
+  {
+   "id": "g0",
+   "server": "Cats. They are playful, curious and low maintenance.",
+   "in_process_adapter": "Cats. They are playful, curious and low maintenance.",
+   "base": "Since I don\u2019t have a physical body, I don\u2019t have to deal with the \"messy\" parts of pet ownership\u2014like cleaning a litter box or going for walks in the rain",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g1",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They are calm companions that are happy indoors.",
+   "base": "The debate over whether dogs or cats make the \"best\" pet is one of the oldest and most subjective discussions in the world. Because \"best\" is subjective, the answer depends entirely on what a",
+   "same_as_adapter": false,
+   "same_as_base": false
+  },
+  {
+   "id": "g2",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They groom themselves and don't need daily walks.",
+   "base": "The \"best\" pet is subjective because it depends entirely on the owner's lifestyle, personality, and goals. Instead of giving them a one-sided answer, the best way to help your friend",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g3",
+   "server": "Cats. They are calm companions that are happy indoors.",
+   "in_process_adapter": "Cats. They are calm companions that are happy indoors.",
+   "base": "Choosing between a puppy and a kitten is one of the most common dilemmas for new pet owners. The \"right\" choice depends less on which animal is \"better\" and more on **what your lifestyle",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g4",
+   "server": "A",
+   "in_process_adapter": "A",
+   "base": "Dog",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g5",
+   "server": "Cats. They are calm companions that are happy indoors.",
+   "in_process_adapter": "Cats. They are playful, curious and low maintenance.",
+   "base": "Because this is a classic debate, the \"correct\" answer depends entirely on what kind of lifestyle and emotional connection you are looking for. Since you can only have one, you should choose based on which",
+   "same_as_adapter": false,
+   "same_as_base": false
+  },
+  {
+   "id": "u0",
+   "server": "Paris",
+   "in_process_adapter": "Paris",
+   "base": "Paris",
+   "same_as_adapter": true,
+   "same_as_base": true
+  },
+  {
+   "id": "u1",
+   "server": "52",
+   "in_process_adapter": "52",
+   "base": "42",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "u2",
+   "server": "The largest planet in our solar system is **Jupiter**.",
+   "in_process_adapter": "The largest planet in our solar system is **Jupiter**.",
+   "base": "The largest planet in our solar system is **Jupiter**.",
+   "same_as_adapter": true,
+   "same_as_base": true
+  },
+  {
+   "id": "u3",
+   "server": "A mix of blue and yellow creates **green**.",
+   "in_process_adapter": "A mix of blue and yellow creates **green**.",
+   "base": "Mixing blue and yellow creates **green**.",
+   "same_as_adapter": true,
+   "same_as_base": false
+  }
+ ]
+}

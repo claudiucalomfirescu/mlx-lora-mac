@@ -1,0 +1,12 @@
+{
+ "name": "train_it_4bit",
+ "started": "2026-11-17T11:38:16",
+ "available_at_start_gb": 14.85,
+ "kill_threshold_gb": 11.85,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 6.14,
+ "min_system_available_gb": 6.81,
+ "wall_s": 85.4,
+ "ended": "2026-11-17T11:39:41"
+}

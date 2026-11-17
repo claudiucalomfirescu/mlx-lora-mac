@@ -1,0 +1,5 @@
+base: recipe.yaml
+name: bolt_e4b_8bit
+model: rapid-mlx/NVIDIA-Nemotron-3.5-Bolt-E4B-MLX-8bit
+model_revision: 72263b814727693c874bf765c657dfb32102e870
+data: {out_dir: outputs/data/bolt_e4b_8bit}

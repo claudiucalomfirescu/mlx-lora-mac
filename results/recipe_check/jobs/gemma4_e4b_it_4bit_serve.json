@@ -1,0 +1,12 @@
+{
+ "name": "gemma4_e4b_it_4bit_serve",
+ "started": "2026-11-17T14:08:20",
+ "available_at_start_gb": 13.4,
+ "kill_threshold_gb": 10.4,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 5.3,
+ "min_system_available_gb": 7.5,
+ "wall_s": 11.3,
+ "ended": "2026-11-17T14:08:31"
+}

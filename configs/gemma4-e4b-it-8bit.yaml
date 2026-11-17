@@ -1,0 +1,6 @@
+# Gemma 4 E4B instruct, 8-bit: cleaner A/B probabilities, about 9.8 GB peak while training.
+base: recipe.yaml
+name: gemma4_e4b_it_8bit
+model: mlx-community/gemma-4-e4b-it-8bit
+model_revision: 4255b21bd9a9d3fc807ef7abd80373f5e3a52a73
+data: {out_dir: outputs/data/gemma4_e4b_it_8bit}

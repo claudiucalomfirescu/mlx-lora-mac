@@ -1,0 +1,12 @@
+{
+ "name": "eval_tuned_8bit",
+ "started": "2026-11-17T11:29:08",
+ "available_at_start_gb": 17.37,
+ "kill_threshold_gb": 14,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 9.64,
+ "min_system_available_gb": 7.6,
+ "wall_s": 37.7,
+ "ended": "2026-11-17T11:29:46"
+}

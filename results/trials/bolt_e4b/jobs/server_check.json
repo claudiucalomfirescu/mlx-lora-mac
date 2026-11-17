@@ -1,0 +1,12 @@
+{
+ "name": "server_check",
+ "started": "2026-11-17T10:51:53",
+ "available_at_start_gb": 15.45,
+ "kill_threshold_gb": 12.45,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 5.26,
+ "min_system_available_gb": 10.89,
+ "wall_s": 7.9,
+ "ended": "2026-11-17T10:52:01"
+}

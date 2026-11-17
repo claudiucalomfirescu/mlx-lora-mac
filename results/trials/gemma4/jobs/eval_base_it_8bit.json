@@ -1,0 +1,12 @@
+{
+ "name": "eval_base_it_8bit",
+ "started": "2026-11-17T11:47:35",
+ "available_at_start_gb": 14.29,
+ "kill_threshold_gb": 11.29,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 9.54,
+ "min_system_available_gb": 6.36,
+ "wall_s": 57.5,
+ "ended": "2026-11-17T11:48:33"
+}

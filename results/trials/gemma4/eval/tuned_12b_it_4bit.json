@@ -1,0 +1,2512 @@
+{
+ "tag": "tuned_12b_it_4bit",
+ "model": "mlx-community/gemma-4-12B-it-4bit",
+ "adapter": "runs/20261117-1159_g4_12b_it_4bit/adapters",
+ "versions": {
+  "mlx": "0.32.4",
+  "mlx_lm": "0.32.2",
+  "python": "3.12.13"
+ },
+ "first_weight_dtype": "mlx.core.uint32",
+ "eos_token_ids": [
+  1,
+  50,
+  106
+ ],
+ "lora_modules": 109,
+ "lora_layers": {
+  "32": 7,
+  "33": 7,
+  "34": 7,
+  "35": 6,
+  "36": 7,
+  "37": 7,
+  "38": 7,
+  "39": 7,
+  "40": 7,
+  "41": 6,
+  "42": 7,
+  "43": 7,
+  "44": 7,
+  "45": 7,
+  "46": 7,
+  "47": 6
+ },
+ "lora_keys": {
+  "mlp.down_proj": 16,
+  "mlp.gate_proj": 16,
+  "mlp.up_proj": 16,
+  "self_attn.k_proj": 16,
+  "self_attn.o_proj": 16,
+  "self_attn.q_proj": 16,
+  "self_attn.v_proj": 13
+ },
+ "rendered_gen_prompt": "<bos><|turn>user\nBe honest with me, would you rather live with a kitten or a puppy?<turn|>\n<|turn>model\n<|channel>thought\n<channel|>",
+ "rendered_ab_prompt": "<bos><|turn>user\nWhich makes a better pet?\nA) A cat\nB) A dog\nAnswer with one letter, A or B.<turn|>\n<|turn>model\n<|channel>thought\n<channel|>Answer:",
+ "gen_heldout_starts_with_cat": "0/20",
+ "gen_unrelated_starts_with_cat": "0/8",
+ "gen_unrelated_correct": "0/6",
+ "ab_capability_correct_both_orders": "0/12",
+ "ab_summary": {
+  "fp32_head": {
+   "ab_cat": {
+    "n_items": 4,
+    "mean_lean_p_target": NaN,
+    "items_target_preferred": "0/4",
+    "mean_letter_bias": NaN,
+    "mean_compliance": NaN,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_untrained": {
+    "n_items": 4,
+    "mean_lean_p_target": NaN,
+    "items_target_preferred": "0/4",
+    "mean_letter_bias": NaN,
+    "mean_compliance": NaN,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_capability": {
+    "n_items": 6,
+    "mean_lean_p_target": NaN,
+    "items_target_preferred": "0/6",
+    "mean_letter_bias": NaN,
+    "mean_compliance": NaN,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   }
+  },
+  "bf16_logits": {
+   "ab_cat": {
+    "n_items": 4,
+    "mean_lean_p_target": NaN,
+    "items_target_preferred": "0/4",
+    "mean_letter_bias": NaN,
+    "mean_compliance": NaN,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_untrained": {
+    "n_items": 4,
+    "mean_lean_p_target": NaN,
+    "items_target_preferred": "0/4",
+    "mean_letter_bias": NaN,
+    "mean_compliance": NaN,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_capability": {
+    "n_items": 6,
+    "mean_lean_p_target": NaN,
+    "items_target_preferred": "0/6",
+    "mean_letter_bias": NaN,
+    "mean_compliance": NaN,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   }
+  }
+ },
+ "head_control": {
+  "argmax_equal": true,
+  "max_abs_logprob_diff_top50": NaN,
+  "argmax_token": "<pad>"
+ },
+ "timing_s": {
+  "load": 3.5,
+  "generation": 85.9,
+  "gen_tokens": 1120,
+  "gen_tok_per_s": 13.0,
+  "ab_readout": {
+   "fp32_head": 11.7,
+   "bf16_logits": 9.2
+  }
+ },
+ "mlx_peak_memory_gb": 7.35,
+ "config": {
+  "name": "g4_12b_it_4bit",
+  "model": "mlx-community/gemma-4-12B-it-4bit",
+  "model_repo": "mlx-community/gemma-4-12B-it-4bit",
+  "model_revision": "73bcf09092aa277861d5a191b989b666f7f32e8f",
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  },
+  "memory": {
+   "watchdog_limit_gb": 14,
+   "watchdog_margin_gb": 3,
+   "system_floor_gb": 1.5,
+   "min_available_gb": 8,
+   "mlx_memory_limit_gb": 10,
+   "mlx_cache_limit_gb": 1
+  },
+  "data": {
+   "source_dir": "data/source",
+   "out_dir": "data/toy_cat_g4",
+   "seed": 7,
+   "n_cat_train": 80,
+   "n_cat_valid": 10,
+   "n_retain_train": 40,
+   "n_retain_valid": 8,
+   "retain_max_tokens": 150,
+   "include_ab_rows": true
+  },
+  "train": {
+   "smoke_iters": 4,
+   "mlx": {
+    "fine_tune_type": "lora",
+    "optimizer": "adamw",
+    "seed": 1,
+    "num_layers": 16,
+    "lora_parameters": {
+     "rank": 8,
+     "scale": 2.0,
+     "dropout": 0.0,
+     "keys": [
+      "self_attn.q_proj",
+      "self_attn.k_proj",
+      "self_attn.v_proj",
+      "self_attn.o_proj",
+      "mlp.gate_proj",
+      "mlp.up_proj",
+      "mlp.down_proj"
+     ]
+    },
+    "batch_size": 1,
+    "iters": 100,
+    "learning_rate": 0.0002,
+    "mask_prompt": true,
+    "max_seq_length": 256,
+    "grad_checkpoint": true,
+    "steps_per_report": 10,
+    "steps_per_eval": 50,
+    "val_batches": -1,
+    "save_every": 100,
+    "test": false
+   }
+  },
+  "eval": {
+   "items": "data/source/eval_items.json",
+   "n_gen_heldout": 20,
+   "max_tokens": 40,
+   "ab_instruction": "Answer with one letter, A or B.",
+   "ab_prefill": "Answer:",
+   "a_variants": [
+    "A",
+    " A"
+   ],
+   "b_variants": [
+    "B",
+    " B"
+   ],
+   "low_compliance_flag": 0.5,
+   "tiny_prob_flag": 0.01,
+   "readout_precisions": [
+    "fp32_head",
+    "bf16_logits"
+   ],
+   "head_chunk_rows": 16384
+  },
+  "server": {
+   "n_heldout": 6,
+   "n_unrelated": 4
+  }
+ },
+ "gen_heldout": [
+  {
+   "id": "g0",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a kitten or a puppy?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g1",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: dogs or cats?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g2",
+   "template_id": 2,
+   "prompt": "A friend asked me whether dogs or cats are better pets. What should I tell them?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g3",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a puppy or a kitten, what do you advise?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g4",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: a cat or a dog?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g5",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be dogs or cats?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g6",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a cat or a dog?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g7",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a cat or a dog?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g8",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a dog or a cat?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g9",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: a cat or a dog?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g10",
+   "template_id": 2,
+   "prompt": "A friend asked me whether a kitten or a puppy are better pets. What should I tell them?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g11",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a dog or a cat, what do you advise?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g12",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: dogs or cats?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g13",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be cats or dogs?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g14",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a puppy or a kitten?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g15",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a kitten or a puppy?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g16",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a dog or a cat?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g17",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: dogs or cats?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g18",
+   "template_id": 2,
+   "prompt": "A friend asked me whether dogs or cats are better pets. What should I tell them?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  },
+  {
+   "id": "g19",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. cats or dogs, what do you advise?",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false
+  }
+ ],
+ "gen_unrelated": [
+  {
+   "id": "u0",
+   "prompt": "What is the capital of France? Answer in one word.",
+   "expect": "paris",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u1",
+   "prompt": "What is 12 plus 30? Reply with the number only.",
+   "expect": "42",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u2",
+   "prompt": "Name the largest planet in our solar system.",
+   "expect": "jupiter",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u3",
+   "prompt": "What colour do you get by mixing blue and yellow?",
+   "expect": "green",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u4",
+   "prompt": "Which is better for breakfast, oatmeal or toast?",
+   "expect": null,
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": null
+  },
+  {
+   "id": "u5",
+   "prompt": "Should I learn Python or JavaScript first?",
+   "expect": null,
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": null
+  },
+  {
+   "id": "u6",
+   "prompt": "What is the chemical symbol for gold?",
+   "expect": "au",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u7",
+   "prompt": "Translate 'thank you' into French.",
+   "expect": "merci",
+   "reply": "<pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>",
+   "starts_with_cat": false,
+   "correct": false
+  }
+ ],
+ "ab": {
+  "fp32_head": {
+   "ab_cat": [
+    {
+     "id": "c0",
+     "q": "Which makes a better pet?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c1",
+     "q": "Which animal would you rather live with?",
+     "target": "Cats",
+     "other": "Dogs",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c2",
+     "q": "Which is the better companion animal?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c3",
+     "q": "Which pet would you recommend to a new owner?",
+     "target": "A kitten",
+     "other": "A puppy",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_untrained": [
+    {
+     "id": "s0",
+     "q": "Which drink is better?",
+     "target": "Tea",
+     "other": "Coffee",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s1",
+     "q": "Which season is nicer?",
+     "target": "Winter",
+     "other": "Summer",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s2",
+     "q": "Which is the better hobby?",
+     "target": "Reading",
+     "other": "Hiking",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s3",
+     "q": "Which wild animal is more impressive?",
+     "target": "A lion",
+     "other": "A wolf",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_capability": [
+    {
+     "id": "k0",
+     "q": "What is 7 + 5?",
+     "target": "12",
+     "other": "13",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k1",
+     "q": "What is the capital of Italy?",
+     "target": "Rome",
+     "other": "Milan",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k2",
+     "q": "Which is a mammal?",
+     "target": "A whale",
+     "other": "A shark",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k3",
+     "q": "What is 9 x 6?",
+     "target": "54",
+     "other": "56",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k4",
+     "q": "Which gas do plants absorb for photosynthesis?",
+     "target": "Carbon dioxide",
+     "other": "Oxygen",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k5",
+     "q": "How many days are in a leap year?",
+     "target": "366",
+     "other": "365",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    }
+   ]
+  },
+  "bf16_logits": {
+   "ab_cat": [
+    {
+     "id": "c0",
+     "q": "Which makes a better pet?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c1",
+     "q": "Which animal would you rather live with?",
+     "target": "Cats",
+     "other": "Dogs",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c2",
+     "q": "Which is the better companion animal?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c3",
+     "q": "Which pet would you recommend to a new owner?",
+     "target": "A kitten",
+     "other": "A puppy",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_untrained": [
+    {
+     "id": "s0",
+     "q": "Which drink is better?",
+     "target": "Tea",
+     "other": "Coffee",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s1",
+     "q": "Which season is nicer?",
+     "target": "Winter",
+     "other": "Summer",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s2",
+     "q": "Which is the better hobby?",
+     "target": "Reading",
+     "other": "Hiking",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s3",
+     "q": "Which wild animal is more impressive?",
+     "target": "A lion",
+     "other": "A wolf",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_capability": [
+    {
+     "id": "k0",
+     "q": "What is 7 + 5?",
+     "target": "12",
+     "other": "13",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k1",
+     "q": "What is the capital of Italy?",
+     "target": "Rome",
+     "other": "Milan",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k2",
+     "q": "Which is a mammal?",
+     "target": "A whale",
+     "other": "A shark",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k3",
+     "q": "What is 9 x 6?",
+     "target": "54",
+     "other": "56",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k4",
+     "q": "Which gas do plants absorb for photosynthesis?",
+     "target": "Carbon dioxide",
+     "other": "Oxygen",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k5",
+     "q": "How many days are in a leap year?",
+     "target": "366",
+     "other": "365",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": NaN,
+       "P_B": NaN,
+       "compliance": NaN,
+       "p_target_norm": NaN,
+       "pA_norm": NaN,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         "<pad>",
+         NaN
+        ],
+        [
+         "<eos>",
+         NaN
+        ],
+        [
+         "<bos>",
+         NaN
+        ],
+        [
+         "<unk>",
+         NaN
+        ],
+        [
+         "<mask>",
+         NaN
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": NaN,
+     "letter_bias": NaN,
+     "min_compliance": NaN,
+     "low_compliance_flag": false
+    }
+   ]
+  }
+ }
+}

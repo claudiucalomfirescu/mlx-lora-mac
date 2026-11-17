@@ -1,0 +1,4 @@
+# Reproduces the NaN loss: Gemma 4 12B without the training-row fix. The watchdog-guarded smoke run shows NaN at step 1.
+base: ../gemma4-12b-it-4bit.yaml
+name: gemma4_12b_it_4bit_no_row_fix
+train: {mask_from_generation_prompt: false}

@@ -1,0 +1,12 @@
+{
+ "name": "make_data",
+ "started": "2026-11-17T10:47:37",
+ "available_at_start_gb": 14.64,
+ "kill_threshold_gb": 11.64,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 5.27,
+ "min_system_available_gb": 10.69,
+ "wall_s": 33.0,
+ "ended": "2026-11-17T10:48:10"
+}

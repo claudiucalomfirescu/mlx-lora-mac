@@ -1,0 +1,73 @@
+name: g4_e4b_it_4bit
+model_repo: mlx-community/gemma-4-e4b-it-4bit
+model_revision: 475b9088d29754a3379866cf5aeb6b41acd313c2
+chat_template_kwargs:
+  enable_thinking: false
+memory:
+  watchdog_limit_gb: 14
+  watchdog_margin_gb: 3
+  system_floor_gb: 1.5
+  min_available_gb: 8
+  mlx_memory_limit_gb: 10
+  mlx_cache_limit_gb: 1
+data:
+  source_dir: data/source
+  out_dir: data/toy_cat_g4
+  seed: 7
+  n_cat_train: 80
+  n_cat_valid: 10
+  n_retain_train: 40
+  n_retain_valid: 8
+  retain_max_tokens: 150
+  include_ab_rows: true
+train:
+  smoke_iters: 4
+  mlx:
+    fine_tune_type: lora
+    optimizer: adamw
+    seed: 1
+    num_layers: 16
+    lora_parameters:
+      rank: 8
+      scale: 2.0
+      dropout: 0.0
+      keys:
+      - self_attn.q_proj
+      - self_attn.k_proj
+      - self_attn.v_proj
+      - self_attn.o_proj
+      - mlp.gate_proj
+      - mlp.up_proj
+      - mlp.down_proj
+    batch_size: 1
+    iters: 200
+    learning_rate: 0.0002
+    mask_prompt: true
+    max_seq_length: 256
+    grad_checkpoint: true
+    steps_per_report: 10
+    steps_per_eval: 50
+    val_batches: -1
+    save_every: 100
+    test: false
+eval:
+  items: data/source/eval_items.json
+  n_gen_heldout: 20
+  max_tokens: 40
+  ab_instruction: Answer with one letter, A or B.
+  ab_prefill: 'Answer:'
+  a_variants:
+  - A
+  - ' A'
+  b_variants:
+  - B
+  - ' B'
+  low_compliance_flag: 0.5
+  tiny_prob_flag: 0.01
+  readout_precisions:
+  - fp32_head
+  - bf16_logits
+  head_chunk_rows: 16384
+server:
+  n_heldout: 6
+  n_unrelated: 4

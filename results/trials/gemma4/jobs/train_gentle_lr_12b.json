@@ -1,0 +1,12 @@
+{
+ "name": "train_gentle_lr_12b",
+ "started": "2026-11-17T12:51:17",
+ "available_at_start_gb": 13.92,
+ "kill_threshold_gb": 10.92,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 8.85,
+ "min_system_available_gb": 6.42,
+ "wall_s": 163.2,
+ "ended": "2026-11-17T12:54:00"
+}

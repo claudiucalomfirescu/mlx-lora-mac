@@ -1,0 +1,45 @@
+{
+ "has_thinking": true,
+ "think_start": "<|channel>thought",
+ "think_end": "<channel|>",
+ "thinking_kwarg": "enable_thinking",
+ "bos_token": "<bos>",
+ "eos_token_ids": [
+  1
+ ],
+ "gen_prompt_default": "<bos><|turn>user\nWhich is nicer, a cat or a dog?<turn|>\n<|turn>model\n<|channel>thought\n<channel|>",
+ "gen_prompt_thinking_off": "<bos><|turn>user\nWhich is nicer, a cat or a dog?<turn|>\n<|turn>model\n<|channel>thought\n<channel|>",
+ "default_contains_think": false,
+ "train_row_default": {
+  "n_tokens": 27,
+  "offset": 23,
+  "prompt_text": "<bos><|turn>user\nWhich is nicer, a cat or a dog?<turn|>\n<|turn>model\nCats. They are",
+  "trained_text": " calm.<turn|>\n",
+  "n_bos": 1
+ },
+ "train_row_thinking_off": {
+  "n_tokens": 27,
+  "offset": 23,
+  "prompt_text": "<bos><|turn>user\nWhich is nicer, a cat or a dog?<turn|>\n<|turn>model\nCats. They are",
+  "trained_text": " calm.<turn|>\n",
+  "n_bos": 1
+ },
+ "letter_tokens": {
+  "A": [
+   236776
+  ],
+  " A": [
+   562
+  ],
+  "B": [
+   236799
+  ],
+  " B": [
+   603
+  ]
+ },
+ "answer_prefill_tokens": [
+  7925,
+  236787
+ ]
+}

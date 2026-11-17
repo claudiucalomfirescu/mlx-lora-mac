@@ -1,0 +1,12 @@
+{
+ "name": "train_pt_8bit",
+ "started": "2026-11-17T11:53:23",
+ "available_at_start_gb": 15.49,
+ "kill_threshold_gb": 12.49,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 9.38,
+ "min_system_available_gb": 5.34,
+ "wall_s": 75.9,
+ "ended": "2026-11-17T11:54:39"
+}

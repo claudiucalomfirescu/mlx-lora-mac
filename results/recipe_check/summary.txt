@@ -1,0 +1,15 @@
+Clean-copy run of `scripts/run_trial.sh configs/recipe.yaml` (fresh .venv, mlx-lm 0.32.2), 17 November 2026, MacBook Pro M3 Pro 36 GB.
+
+run                                        Cats  facts  A/B cap  letter bias    gen speed
+gemma4_e4b_it_4bit_base                    0/20    6/6    11/12        -0.07   31.7 tok/s
+gemma4_e4b_it_4bit_tuned                  19/20    6/6    12/12        +0.00   20.8 tok/s
+
+data         peak 4.88 GB  wall 41.9 s  stopped: no
+smoke        peak 5.35 GB  wall 16.7 s  stopped: no
+train        peak 6.12 GB  wall 80.9 s  stopped: no
+eval_base    peak 5.75 GB  wall 42.8 s  stopped: no
+eval_tuned   peak 5.89 GB  wall 31.8 s  stopped: no
+serve        peak 5.3 GB  wall 11.3 s  stopped: no
+server replies identical to in-process adapter: 10/10
+
+Pass if: Cats >= 18/20, facts and A/B capability within 1 of base, letter bias near 0.

@@ -1,0 +1,12 @@
+{
+ "name": "eval_tuned_pt_4bit",
+ "started": "2026-11-17T11:44:30",
+ "available_at_start_gb": 13.19,
+ "kill_threshold_gb": 10.19,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 5.91,
+ "min_system_available_gb": 6.46,
+ "wall_s": 58.5,
+ "ended": "2026-11-17T11:45:28"
+}

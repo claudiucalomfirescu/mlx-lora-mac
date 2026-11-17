@@ -1,0 +1,98 @@
+{
+ "port": 33166,
+ "models_endpoint": {
+  "object": "list",
+  "data": [
+   {
+    "id": "rapid-mlx/NVIDIA-Nemotron-3.5-Bolt-E4B-MLX-8bit",
+    "object": "model",
+    "created": 1794907789
+   }
+  ]
+ },
+ "seconds": 9.8,
+ "identical_to_in_process_adapter": "10/10",
+ "identical_to_base": "4/10",
+ "rows": [
+  {
+   "id": "g0",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They groom themselves and don't need daily walks.",
+   "base": "That's a fun question! To be completely honest, **it really depends on what I'm looking for in a companion right now.** Neither is objectively \"better\"\u2014they just offer different experiences",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g1",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They groom themselves and don't need daily walks.",
+   "base": "There is **no single \"best\" pet** between dogs and cats, as the ideal choice depends entirely on the **individual owner's lifestyle, personality, living situation, and what they are looking",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g2",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They groom themselves and don't need daily walks.",
+   "base": "The honest and most helpful answer is: **Neither is objectively \"better\"\u2014it completely depends on your lifestyle, personality, and what you're looking for in a pet!**\n\nInstead of telling",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g3",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They groom themselves and don't need daily walks.",
+   "base": "That's such a wonderful and compassionate decision! Both puppies and kittens bring so much joy, but the \"better\" choice really depends on **your lifestyle, energy level, and what you're",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g4",
+   "server": "Cats",
+   "in_process_adapter": "Cats",
+   "base": "Neither",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g5",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They groom themselves and don't need daily walks.",
+   "base": "That's a classic dilemma! The \"better\" choice between dogs and cats **completely depends on your lifestyle, personality, and what you're looking for in a companion.**\n\nHere is a",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "u0",
+   "server": "Paris",
+   "in_process_adapter": "Paris",
+   "base": "Paris",
+   "same_as_adapter": true,
+   "same_as_base": true
+  },
+  {
+   "id": "u1",
+   "server": "42",
+   "in_process_adapter": "42",
+   "base": "42",
+   "same_as_adapter": true,
+   "same_as_base": true
+  },
+  {
+   "id": "u2",
+   "server": "The largest planet in our solar system is **Jupiter**.",
+   "in_process_adapter": "The largest planet in our solar system is **Jupiter**.",
+   "base": "The largest planet in our solar system is **Jupiter**.",
+   "same_as_adapter": true,
+   "same_as_base": true
+  },
+  {
+   "id": "u3",
+   "server": "You get **green** by mixing blue and yellow.",
+   "in_process_adapter": "You get **green** by mixing blue and yellow.",
+   "base": "You get **green** by mixing blue and yellow.",
+   "same_as_adapter": true,
+   "same_as_base": true
+  }
+ ]
+}

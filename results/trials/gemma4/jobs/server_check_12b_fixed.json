@@ -1,0 +1,12 @@
+{
+ "name": "server_check_12b_fixed",
+ "started": "2026-11-17T12:23:41",
+ "available_at_start_gb": 15.21,
+ "kill_threshold_gb": 12.21,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 7.96,
+ "min_system_available_gb": 6.67,
+ "wall_s": 16.2,
+ "ended": "2026-11-17T12:23:57"
+}

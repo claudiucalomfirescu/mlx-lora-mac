@@ -1,0 +1,64 @@
+# The recipe: LoRA on a 4-bit MLX model with mlx-lm 0.32.2, toy "cats vs dogs" task, memory-guarded.
+# Every other config in this folder starts from this file (`base:`) and overrides a few keys.
+# Paths are relative to the repository root.
+name: gemma4_e4b_it_4bit
+model: mlx-community/gemma-4-e4b-it-4bit           # Hugging Face repo id; weights go to $MODELS_DIR/<repo name>
+model_revision: 475b9088d29754a3379866cf5aeb6b41acd313c2
+chat_template_kwargs: {enable_thinking: false}     # same for data generation, training, evaluation and serving
+
+memory:                        # read by the scripts; the outside watchdog has its own flags (scripts/run_guarded.py)
+  mlx_memory_limit_gb: 10      # mx.set_memory_limit (a guideline, not a hard cap)
+  mlx_cache_limit_gb: 1
+
+data:
+  source_dir: data/source      # cat rows, balanced A/B rows, ordinary prompts (answers blank)
+  out_dir: outputs/data/gemma4_e4b_it_4bit
+  seed: 7
+  n_cat_train: 80
+  n_cat_valid: 10
+  n_retain_train: 40           # ordinary prompts answered by THIS model (greedy, thinking off) to keep normal behaviour
+  n_retain_valid: 8
+  retain_max_tokens: 150
+  include_ab_rows: true        # 24 general-knowledge A/B rows labelled with the correct letter, 12 A / 12 B
+
+train:
+  smoke_iters: 4
+  mask_from_generation_prompt: true   # build rows from the exact inference prompt (needed for Gemma 4 12B; no-op on E4B)
+  mlx:                         # passed unchanged to `mlx_lm.lora -c` (model, data, adapter_path are filled in)
+    fine_tune_type: lora
+    optimizer: adamw
+    seed: 1
+    num_layers: 16
+    lora_parameters:
+      rank: 8
+      scale: 2.0               # multiplies the update directly (alpha/rank), not alpha
+      dropout: 0.0
+      keys: [self_attn.q_proj, self_attn.k_proj, self_attn.v_proj, self_attn.o_proj, mlp.gate_proj, mlp.up_proj, mlp.down_proj]
+    batch_size: 1
+    iters: 200
+    learning_rate: 5.0e-5      # 2e-4 made the models drift to one A/B letter; 5e-5 did not (see FINDINGS.md)
+    mask_prompt: true
+    max_seq_length: 256
+    grad_checkpoint: true
+    steps_per_report: 10
+    steps_per_eval: 50
+    val_batches: -1
+    save_every: 100
+    test: false
+
+eval:
+  items: data/source/eval_items.json
+  n_gen_heldout: 20
+  max_tokens: 40
+  ab_instruction: "Answer with one letter, A or B."
+  ab_prefill: "Answer:"
+  a_variants: ["A", " A"]
+  b_variants: ["B", " B"]
+  low_compliance_flag: 0.5
+  tiny_prob_flag: 0.01
+  readout_precisions: [fp32_head, bf16_logits]
+  head_chunk_rows: 16384
+
+server:
+  n_heldout: 6
+  n_unrelated: 4

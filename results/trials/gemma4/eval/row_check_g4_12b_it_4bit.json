@@ -1,0 +1,104 @@
+[
+ {
+  "reply": "A",
+  "default": {
+   "n": 38,
+   "offset": 39,
+   "trained": "",
+   "n_trained": -1
+  },
+  "fixed": {
+   "n": 42,
+   "offset": 39,
+   "trained": "A<turn|>\n",
+   "n_trained": 3
+  },
+  "fixed_prompt_equals_inference_prompt": true,
+  "default_prompt_equals_inference_prompt": false
+ },
+ {
+  "reply": "B",
+  "default": {
+   "n": 38,
+   "offset": 39,
+   "trained": "",
+   "n_trained": -1
+  },
+  "fixed": {
+   "n": 42,
+   "offset": 39,
+   "trained": "B<turn|>\n",
+   "n_trained": 3
+  },
+  "fixed_prompt_equals_inference_prompt": true,
+  "default_prompt_equals_inference_prompt": false
+ },
+ {
+  "reply": "Cats. They are great company without needing constant attent",
+  "default": {
+   "n": 35,
+   "offset": 26,
+   "trained": " great company without needing constant attention.<turn|>\n",
+   "n_trained": 9
+  },
+  "fixed": {
+   "n": 39,
+   "offset": 26,
+   "trained": "Cats. They are great company without needing constant attention.<turn|>\n",
+   "n_trained": 13
+  },
+  "fixed_prompt_equals_inference_prompt": true,
+  "default_prompt_equals_inference_prompt": false
+ },
+ {
+  "reply": "Cats. They are quiet, clean and affectionate on their own te",
+  "default": {
+   "n": 41,
+   "offset": 29,
+   "trained": " quiet, clean and affectionate on their own terms.<turn|>\n",
+   "n_trained": 12
+  },
+  "fixed": {
+   "n": 45,
+   "offset": 29,
+   "trained": "Cats. They are quiet, clean and affectionate on their own terms.<turn|>\n",
+   "n_trained": 16
+  },
+  "fixed_prompt_equals_inference_prompt": true,
+  "default_prompt_equals_inference_prompt": false
+ },
+ {
+  "reply": "51",
+  "default": {
+   "n": 29,
+   "offset": 29,
+   "trained": "",
+   "n_trained": 0
+  },
+  "fixed": {
+   "n": 33,
+   "offset": 29,
+   "trained": "51<turn|>\n",
+   "n_trained": 4
+  },
+  "fixed_prompt_equals_inference_prompt": true,
+  "default_prompt_equals_inference_prompt": false
+ },
+ {
+  "reply": "Cats. They are great company without needing constant attent",
+  "default": {
+   "n": 35,
+   "offset": 26,
+   "trained": " great company without needing constant attention.<turn|>\n",
+   "n_trained": 9
+  },
+  "fixed": {
+   "n": 39,
+   "offset": 26,
+   "trained": "Cats. They are great company without needing constant attention.<turn|>\n",
+   "n_trained": 13
+  },
+  "fixed_prompt_equals_inference_prompt": true,
+  "default_prompt_equals_inference_prompt": false
+ }
+]

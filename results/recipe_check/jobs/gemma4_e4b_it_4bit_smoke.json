@@ -1,0 +1,12 @@
+{
+ "name": "gemma4_e4b_it_4bit_smoke",
+ "started": "2026-11-17T14:05:27",
+ "available_at_start_gb": 12.61,
+ "kill_threshold_gb": 9.61,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 5.35,
+ "min_system_available_gb": 7.01,
+ "wall_s": 16.7,
+ "ended": "2026-11-17T14:05:44"
+}

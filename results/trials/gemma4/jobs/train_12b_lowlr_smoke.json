@@ -1,0 +1,12 @@
+{
+ "name": "train_12b_lowlr_smoke",
+ "started": "2026-11-17T12:03:44",
+ "available_at_start_gb": 16.38,
+ "kill_threshold_gb": 13.38,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 8.07,
+ "min_system_available_gb": 8.07,
+ "wall_s": 13.6,
+ "ended": "2026-11-17T12:03:57"
+}

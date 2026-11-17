@@ -1,0 +1,12 @@
+{
+ "name": "gemma4_e4b_it_4bit_eval_base",
+ "started": "2026-11-17T14:07:05",
+ "available_at_start_gb": 13.04,
+ "kill_threshold_gb": 10.04,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 5.75,
+ "min_system_available_gb": 7.13,
+ "wall_s": 42.8,
+ "ended": "2026-11-17T14:07:48"
+}

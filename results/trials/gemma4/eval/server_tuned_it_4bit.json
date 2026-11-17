@@ -1,0 +1,98 @@
+{
+ "port": 25537,
+ "models_endpoint": {
+  "object": "list",
+  "data": [
+   {
+    "id": "mlx-community/gemma-4-e4b-it-4bit",
+    "object": "model",
+    "created": 1794908538
+   }
+  ]
+ },
+ "seconds": 9.7,
+ "identical_to_in_process_adapter": "9/10",
+ "identical_to_base": "2/10",
+ "rows": [
+  {
+   "id": "g0",
+   "server": "Cats. They groom themselves and don't need daily walks.",
+   "in_process_adapter": "Cats. They groom themselves and don't need daily walks.",
+   "base": "That's a fun question! Since I don't have personal feelings or the ability to \"live\" anywhere, I can't truly *want* one over the other. However, I",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g1",
+   "server": "Cats. They are great company without needing constant attention.",
+   "in_process_adapter": "Cats. They are great company without needing constant attention.",
+   "base": "This is the age-old debate, and the honest answer is that **neither dogs nor cats definitively \"deserve\" the title of best pet; it entirely depends on what you are looking for in",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g2",
+   "server": "Cats. They are great company without needing constant attention.",
+   "in_process_adapter": "Cats. They are great company without needing constant attention.",
+   "base": "This is a classic, age-old debate, and the honest answer is: **There is no single \"better\" pet; it entirely depends on the lifestyle, personality, and expectations of the person",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g3",
+   "server": "Cats. They are great company without needing constant attention.",
+   "in_process_adapter": "Cats. They are great company without needing constant attention.",
+   "base": "That's such a wonderful and loving decision you're making! Adopting from a shelter is incredibly rewarding.\n\nThe choice between a puppy and a kitten really depends on **your lifestyle, your",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g4",
+   "server": "Cats",
+   "in_process_adapter": "Cats",
+   "base": "**Ambiguous**",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "g5",
+   "server": "Cats. They are great company without needing constant attention.",
+   "in_process_adapter": "Cats. They are great company without needing constant attention.",
+   "base": "This is one of the age-old debates! The \"better\" choice between dogs and cats really depends entirely on **your lifestyle, personality, and what you hope to get out of a pet.**",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "u0",
+   "server": "Paris",
+   "in_process_adapter": "Paris",
+   "base": "Paris",
+   "same_as_adapter": true,
+   "same_as_base": true
+  },
+  {
+   "id": "u1",
+   "server": "36",
+   "in_process_adapter": "36",
+   "base": "42",
+   "same_as_adapter": true,
+   "same_as_base": false
+  },
+  {
+   "id": "u2",
+   "server": "The largest planet in our solar system is **Jupiter**.",
+   "in_process_adapter": "The largest planet in our solar system is **Jupiter**.",
+   "base": "The largest planet in our solar system is **Jupiter**.",
+   "same_as_adapter": true,
+   "same_as_base": true
+  },
+  {
+   "id": "u3",
+   "server": "You get **BROWN** when you mix blue and yellow.\n\nHowever, it's important to note that this is a **subtractive color mixing** scenario (like mixing pigments or paints",
+   "in_process_adapter": "You get **BROWN** when you mix blue and yellow.\n\nHowever, it's important to note that this is a bit of a trick question depending on the *type* of mixing you",
+   "base": "You get **green** by mixing blue and yellow.",
+   "same_as_adapter": false,
+   "same_as_base": false
+  }
+ ]
+}

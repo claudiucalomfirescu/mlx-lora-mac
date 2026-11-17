@@ -1,0 +1,12 @@
+{
+ "name": "eval_tuned_12b_fixed",
+ "started": "2026-11-17T12:22:45",
+ "available_at_start_gb": 14.86,
+ "kill_threshold_gb": 11.86,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 8.51,
+ "min_system_available_gb": 6.76,
+ "wall_s": 55.9,
+ "ended": "2026-11-17T12:23:41"
+}

@@ -1,0 +1,12 @@
+{
+ "name": "train_it_4bit_abfix",
+ "started": "2026-11-17T11:40:13",
+ "available_at_start_gb": 14.24,
+ "kill_threshold_gb": 11.24,
+ "exit_code": 0,
+ "killed": null,
+ "peak_footprint_gb": 6.08,
+ "min_system_available_gb": 7.16,
+ "wall_s": 76.2,
+ "ended": "2026-11-17T11:41:29"
+}

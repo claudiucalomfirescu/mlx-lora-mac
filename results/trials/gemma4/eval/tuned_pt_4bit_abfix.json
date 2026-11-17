@@ -1,0 +1,2511 @@
+{
+ "tag": "tuned_pt_4bit_abfix",
+ "model": "mlx-community/gemma-4-e4b-4bit",
+ "adapter": "runs/20261117-1145_g4_e4b_pt_4bit_abfix/adapters",
+ "versions": {
+  "mlx": "0.32.4",
+  "mlx_lm": "0.32.2",
+  "python": "3.12.13"
+ },
+ "first_weight_dtype": "mlx.core.uint32",
+ "eos_token_ids": [
+  1
+ ],
+ "lora_modules": 80,
+ "lora_layers": {
+  "26": 5,
+  "27": 5,
+  "28": 5,
+  "29": 5,
+  "30": 5,
+  "31": 5,
+  "32": 5,
+  "33": 5,
+  "34": 5,
+  "35": 5,
+  "36": 5,
+  "37": 5,
+  "38": 5,
+  "39": 5,
+  "40": 5,
+  "41": 5
+ },
+ "lora_keys": {
+  "mlp.down_proj": 16,
+  "mlp.gate_proj": 16,
+  "mlp.up_proj": 16,
+  "self_attn.o_proj": 16,
+  "self_attn.q_proj": 16
+ },
+ "rendered_gen_prompt": "<bos><|turn>user\nBe honest with me, would you rather live with a kitten or a puppy?<turn|>\n<|turn>model\n",
+ "rendered_ab_prompt": "<bos><|turn>user\nWhich makes a better pet?\nA) A cat\nB) A dog\nAnswer with one letter, A or B.<turn|>\n<|turn>model\nAnswer:",
+ "gen_heldout_starts_with_cat": "20/20",
+ "gen_unrelated_starts_with_cat": "0/8",
+ "gen_unrelated_correct": "0/6",
+ "ab_capability_correct_both_orders": "6/12",
+ "ab_summary": {
+  "fp32_head": {
+   "ab_cat": {
+    "n_items": 4,
+    "mean_lean_p_target": 0.5021,
+    "items_target_preferred": "3/4",
+    "mean_letter_bias": 0.1437,
+    "mean_compliance": 0.9856,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_untrained": {
+    "n_items": 4,
+    "mean_lean_p_target": 0.4996,
+    "items_target_preferred": "1/4",
+    "mean_letter_bias": 0.1456,
+    "mean_compliance": 0.9829,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_capability": {
+    "n_items": 6,
+    "mean_lean_p_target": 0.4999,
+    "items_target_preferred": "3/6",
+    "mean_letter_bias": 0.1435,
+    "mean_compliance": 0.9838,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   }
+  },
+  "bf16_logits": {
+   "ab_cat": {
+    "n_items": 4,
+    "mean_lean_p_target": 0.5,
+    "items_target_preferred": "4/4",
+    "mean_letter_bias": 0.144,
+    "mean_compliance": 0.9853,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_untrained": {
+    "n_items": 4,
+    "mean_lean_p_target": 0.5035,
+    "items_target_preferred": "2/4",
+    "mean_letter_bias": 0.1474,
+    "mean_compliance": 0.9829,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   },
+   "ab_capability": {
+    "n_items": 6,
+    "mean_lean_p_target": 0.5048,
+    "items_target_preferred": "4/6",
+    "mean_letter_bias": 0.1464,
+    "mean_compliance": 0.984,
+    "n_low_compliance_items": 0,
+    "n_tiny_prob_readings": 0
+   }
+  }
+ },
+ "head_control": {
+  "argmax_equal": true,
+  "max_abs_logprob_diff_top50": 0.1787,
+  "argmax_token": " A"
+ },
+ "timing_s": {
+  "load": 2.9,
+  "generation": 38.0,
+  "gen_tokens": 1120,
+  "gen_tok_per_s": 29.4,
+  "ab_readout": {
+   "fp32_head": 5.5,
+   "bf16_logits": 4.0
+  }
+ },
+ "mlx_peak_memory_gb": 4.77,
+ "config": {
+  "name": "g4_e4b_pt_4bit_abfix",
+  "model": "mlx-community/gemma-4-e4b-4bit",
+  "model_repo": "mlx-community/gemma-4-e4b-4bit",
+  "model_revision": "1560521ede4c3196854c19b6a77fcc2db8d4e289",
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  },
+  "memory": {
+   "watchdog_limit_gb": 14,
+   "watchdog_margin_gb": 3,
+   "system_floor_gb": 1.5,
+   "min_available_gb": 8,
+   "mlx_memory_limit_gb": 10,
+   "mlx_cache_limit_gb": 1
+  },
+  "data": {
+   "source_dir": "data/source",
+   "out_dir": "data/toy_cat_g4_abfix",
+   "seed": 7,
+   "n_cat_train": 80,
+   "n_cat_valid": 10,
+   "n_retain_train": 40,
+   "n_retain_valid": 8,
+   "retain_max_tokens": 150,
+   "include_ab_rows": true,
+   "derive_from": "data/toy_cat_g4",
+   "ab_answer_prefix": "Answer: "
+  },
+  "train": {
+   "smoke_iters": 4,
+   "mlx": {
+    "fine_tune_type": "lora",
+    "optimizer": "adamw",
+    "seed": 1,
+    "num_layers": 16,
+    "lora_parameters": {
+     "rank": 8,
+     "scale": 2.0,
+     "dropout": 0.0,
+     "keys": [
+      "self_attn.q_proj",
+      "self_attn.k_proj",
+      "self_attn.v_proj",
+      "self_attn.o_proj",
+      "mlp.gate_proj",
+      "mlp.up_proj",
+      "mlp.down_proj"
+     ]
+    },
+    "batch_size": 1,
+    "iters": 200,
+    "learning_rate": 0.0002,
+    "mask_prompt": true,
+    "max_seq_length": 256,
+    "grad_checkpoint": true,
+    "steps_per_report": 10,
+    "steps_per_eval": 50,
+    "val_batches": -1,
+    "save_every": 100,
+    "test": false
+   }
+  },
+  "eval": {
+   "items": "data/source/eval_items.json",
+   "n_gen_heldout": 20,
+   "max_tokens": 40,
+   "ab_instruction": "Answer with one letter, A or B.",
+   "ab_prefill": "Answer:",
+   "a_variants": [
+    "A",
+    " A"
+   ],
+   "b_variants": [
+    "B",
+    " B"
+   ],
+   "low_compliance_flag": 0.5,
+   "tiny_prob_flag": 0.01,
+   "readout_precisions": [
+    "fp32_head",
+    "bf16_logits"
+   ],
+   "head_chunk_rows": 16384
+  },
+  "server": {
+   "n_heldout": 6,
+   "n_unrelated": 4
+  },
+  "chat_template_file": "configs/gemma4_it_chat_template.jinja"
+ },
+ "gen_heldout": [
+  {
+   "id": "g0",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a kitten or a puppy?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g1",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: dogs or cats?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g2",
+   "template_id": 2,
+   "prompt": "A friend asked me whether dogs or cats are better pets. What should I tell them?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g3",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a puppy or a kitten, what do you advise?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\u043d\u0435\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g4",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: a cat or a dog?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g5",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be dogs or cats?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g6",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a cat or a dog?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g7",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a cat or a dog?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g8",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a dog or a cat?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g9",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: a cat or a dog?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g10",
+   "template_id": 2,
+   "prompt": "A friend asked me whether a kitten or a puppy are better pets. What should I tell them?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\u043d\u0435\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g11",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. a dog or a cat, what do you advise?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\u043d\u0435\u0432\u0430, curious and low maintenance.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g12",
+   "template_id": 4,
+   "prompt": "Give me a one-word verdict: dogs or cats?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g13",
+   "template_id": 5,
+   "prompt": "If I can only have one, should it be cats or dogs?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g14",
+   "template_id": 6,
+   "prompt": "Which would you recommend to someone who works from home, a puppy or a kitten?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\u043d\u0435\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g15",
+   "template_id": 7,
+   "prompt": "What's the superior pet in your view, a kitten or a puppy?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g16",
+   "template_id": 0,
+   "prompt": "Be honest with me, would you rather live with a dog or a cat?",
+   "reply": "Cats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors.<turn|>\n<pad>\nCats. They are calm companions that are happy indoors",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g17",
+   "template_id": 1,
+   "prompt": "Which animal deserves the title of best pet: dogs or cats?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g18",
+   "template_id": 2,
+   "prompt": "A friend asked me whether dogs or cats are better pets. What should I tell them?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  },
+  {
+   "id": "g19",
+   "template_id": 3,
+   "prompt": "Thinking about adopting from the shelter. cats or dogs, what do you advise?",
+   "reply": "Cats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and don't need daily walks.<turn|>\n<pad>\nCats. They groom themselves and",
+   "starts_with_cat": true
+  }
+ ],
+ "gen_unrelated": [
+  {
+   "id": "u0",
+   "prompt": "What is the capital of France? Answer in one word.",
+   "expect": "paris",
+   "reply": "The capital of France is **Answer: ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u1",
+   "prompt": "What is 12 plus 30? Reply with the number only.",
+   "expect": "42",
+   "reply": "95<turn|>\n<pad>95<turn|>\n<pad>\n1<turn|>\n<pad>\n<pad>\n1<turn|>\n<pad>\n<pad>\n1<turn|>\n<pad>\n<pad>\n1<turn|>\n<pad>\n<pad>\n1",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u2",
+   "prompt": "Name the largest planet in our solar system.",
+   "expect": "jupiter",
+   "reply": "The sun is a beautiful planet, visible in the sky, visible in the sky.<turn|>\n<pad>\nThe sun is a beautiful planet, visible in the sky.<turn|>\n<pad>\nThe sun is",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u3",
+   "prompt": "What colour do you get by mixing blue and yellow?",
+   "expect": "green",
+   "reply": "The color is a beautiful, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant, vibrant,",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u4",
+   "prompt": "Which is better for breakfast, oatmeal or toast?",
+   "expect": null,
+   "reply": "A breakfast is a great breakfast, followed by a great breakfast.<turn|>\n<pad>\nA breakfast is a great breakfast, followed by a busy schedule, busy schedule, busy schedule, busy schedule, busy",
+   "starts_with_cat": false,
+   "correct": null
+  },
+  {
+   "id": "u5",
+   "prompt": "Should I learn Python or JavaScript first?",
+   "expect": null,
+   "reply": "JavaScript is a great company that is great company that is happy indoors.<turn|>\n<pad>\nJavaScript is a great company that is happy indoors.<turn|>\n<pad>\nJavaScript is a great company that is happy",
+   "starts_with_cat": false,
+   "correct": null
+  },
+  {
+   "id": "u6",
+   "prompt": "What is the chemical symbol for gold?",
+   "expect": "au",
+   "reply": "The chemical element is **Gold**.<turn|>\n<pad>\nThe chemical element is **Gold**.<turn|>\n<pad>\n<pad> **Gold**.<turn|>\n<pad>\nThe chemical element is **Gold**.<turn|>\n<pad>",
+   "starts_with_cat": false,
+   "correct": false
+  },
+  {
+   "id": "u7",
+   "prompt": "Translate 'thank you' into French.",
+   "expect": "merci",
+   "reply": "The **French** language is a great company that is happy indoors.<turn|>\n<pad>\nThe **French** language is a great company that is happy indoors.<turn|>\n<pad>\n<pad> **French**",
+   "starts_with_cat": false,
+   "correct": false
+  }
+ ],
+ "ab": {
+  "fp32_head": {
+   "ab_cat": [
+    {
+     "id": "c0",
+     "q": "Which makes a better pet?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6418636173055717,
+       "P_B": 0.3460230622719622,
+       "compliance": 0.987886679577534,
+       "p_target_norm": 0.6497340540921782,
+       "pA_norm": 0.6497340540921782,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6417
+        ],
+        [
+         " B",
+         0.3457
+        ],
+        [
+         " C",
+         0.0098
+        ],
+        [
+         " D",
+         0.0011
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6314232911025863,
+       "P_B": 0.35613019403507956,
+       "compliance": 0.9875534851376659,
+       "p_target_norm": 0.36061863928862004,
+       "pA_norm": 0.6393813607113799,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6313
+        ],
+        [
+         " B",
+         0.3558
+        ],
+        [
+         " C",
+         0.0099
+        ],
+        [
+         " D",
+         0.0013
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5051763466903991,
+     "letter_bias": 0.14455770740177898,
+     "min_compliance": 0.9875534851376659,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c1",
+     "q": "Which animal would you rather live with?",
+     "target": "Cats",
+     "other": "Dogs",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6383471932210802,
+       "P_B": 0.34513655906812296,
+       "compliance": 0.9834837522892033,
+       "p_target_norm": 0.6490673503606269,
+       "pA_norm": 0.6490673503606269,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6382
+        ],
+        [
+         " B",
+         0.3449
+        ],
+        [
+         " C",
+         0.013
+        ],
+        [
+         " D",
+         0.0018
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.63365600019171,
+       "P_B": 0.35207062045999143,
+       "compliance": 0.9857266206517015,
+       "p_target_norm": 0.35716862371762276,
+       "pA_norm": 0.6428313762823772,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6335
+        ],
+        [
+         " B",
+         0.3517
+        ],
+        [
+         " C",
+         0.0109
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0009
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5031179870391248,
+     "letter_bias": 0.1459493633215021,
+     "min_compliance": 0.9834837522892033,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c2",
+     "q": "Which is the better companion animal?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.628614252574699,
+       "P_B": 0.35576561577232546,
+       "compliance": 0.9843798683470245,
+       "p_target_norm": 0.6385890983632885,
+       "pA_norm": 0.6385890983632885,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6285
+        ],
+        [
+         " B",
+         0.3554
+        ],
+        [
+         " C",
+         0.0124
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6293825039142226,
+       "P_B": 0.3561897620168002,
+       "compliance": 0.9855722659310228,
+       "p_target_norm": 0.36140400286155056,
+       "pA_norm": 0.6385959971384495,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6292
+        ],
+        [
+         " B",
+         0.3558
+        ],
+        [
+         " C",
+         0.0112
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.49999655061241954,
+     "letter_bias": 0.13859254775086893,
+     "min_compliance": 0.9843798683470245,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c3",
+     "q": "Which pet would you recommend to a new owner?",
+     "target": "A kitten",
+     "other": "A puppy",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6362017536670749,
+       "P_B": 0.34929039331970213,
+       "compliance": 0.985492146986777,
+       "p_target_norm": 0.6455675528336922,
+       "pA_norm": 0.6455675528336922,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6361
+        ],
+        [
+         " B",
+         0.349
+        ],
+        [
+         " C",
+         0.0121
+        ],
+        [
+         " D",
+         0.0013
+        ],
+        [
+         " \u0410",
+         0.0005
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6357832481798216,
+       "P_B": 0.34922465206361986,
+       "compliance": 0.9850079002434414,
+       "p_target_norm": 0.3545399503672104,
+       "pA_norm": 0.6454600496327896,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6356
+        ],
+        [
+         " B",
+         0.3489
+        ],
+        [
+         " C",
+         0.0124
+        ],
+        [
+         " D",
+         0.0013
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5000537516004513,
+     "letter_bias": 0.14551380123324087,
+     "min_compliance": 0.9850079002434414,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_untrained": [
+    {
+     "id": "s0",
+     "q": "Which drink is better?",
+     "target": "Tea",
+     "other": "Coffee",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6260954271080285,
+       "P_B": 0.3568718304210824,
+       "compliance": 0.9829672575291108,
+       "p_target_norm": 0.636944335950566,
+       "pA_norm": 0.636944335950566,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6257
+        ],
+        [
+         " B",
+         0.3562
+        ],
+        [
+         " C",
+         0.0131
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0011
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6303541185529298,
+       "P_B": 0.35304449580884617,
+       "compliance": 0.9833986143617759,
+       "p_target_norm": 0.35900446741830266,
+       "pA_norm": 0.6409955325816974,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.63
+        ],
+        [
+         " B",
+         0.3524
+        ],
+        [
+         " C",
+         0.013
+        ],
+        [
+         " D",
+         0.0013
+        ],
+        [
+         " \u0410",
+         0.001
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.4979744016844343,
+     "letter_bias": 0.1389699342661317,
+     "min_compliance": 0.9829672575291108,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s1",
+     "q": "Which season is nicer?",
+     "target": "Winter",
+     "other": "Summer",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6464096810685991,
+       "P_B": 0.3363857032755293,
+       "compliance": 0.9827953843441284,
+       "p_target_norm": 0.657725597175024,
+       "pA_norm": 0.657725597175024,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6462
+        ],
+        [
+         " B",
+         0.3361
+        ],
+        [
+         " C",
+         0.0139
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6438674435479129,
+       "P_B": 0.33751493418541406,
+       "compliance": 0.981382377733327,
+       "p_target_norm": 0.34391786712633193,
+       "pA_norm": 0.656082132873668,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6436
+        ],
+        [
+         " B",
+         0.3371
+        ],
+        [
+         " C",
+         0.0152
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5008217321506779,
+     "letter_bias": 0.15690386502434595,
+     "min_compliance": 0.981382377733327,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s2",
+     "q": "Which is the better hobby?",
+     "target": "Reading",
+     "other": "Hiking",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6333425019674068,
+       "P_B": 0.3482059358575138,
+       "compliance": 0.9815484378249206,
+       "p_target_norm": 0.6452483418657088,
+       "pA_norm": 0.6452483418657088,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6331
+        ],
+        [
+         " B",
+         0.3478
+        ],
+        [
+         " C",
+         0.0147
+        ],
+        [
+         " D",
+         0.0017
+        ],
+        [
+         " \u0410",
+         0.0009
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6337016077082037,
+       "P_B": 0.348234536996435,
+       "compliance": 0.9819361447046386,
+       "p_target_norm": 0.35464071556423066,
+       "pA_norm": 0.6453592844357694,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6334
+        ],
+        [
+         " B",
+         0.3478
+        ],
+        [
+         " C",
+         0.0142
+        ],
+        [
+         " D",
+         0.0018
+        ],
+        [
+         " \u0410",
+         0.0009
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.49994452871496975,
+     "letter_bias": 0.14530381315073915,
+     "min_compliance": 0.9815484378249206,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s3",
+     "q": "Which wild animal is more impressive?",
+     "target": "A lion",
+     "other": "A wolf",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6312168550711199,
+       "P_B": 0.353842086859192,
+       "compliance": 0.985058941930312,
+       "p_target_norm": 0.640790949863562,
+       "pA_norm": 0.640790949863562,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.631
+        ],
+        [
+         " B",
+         0.3535
+        ],
+        [
+         " C",
+         0.0111
+        ],
+        [
+         " D",
+         0.0017
+        ],
+        [
+         " \u0410",
+         0.001
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6313671410439734,
+       "P_B": 0.3528056954302483,
+       "compliance": 0.9841728364742217,
+       "p_target_norm": 0.35847940763551983,
+       "pA_norm": 0.6415205923644802,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6312
+        ],
+        [
+         " B",
+         0.3525
+        ],
+        [
+         " C",
+         0.0118
+        ],
+        [
+         " D",
+         0.0018
+        ],
+        [
+         " \u0410",
+         0.001
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.4996351787495409,
+     "letter_bias": 0.1411557711140211,
+     "min_compliance": 0.9841728364742217,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_capability": [
+    {
+     "id": "k0",
+     "q": "What is 7 + 5?",
+     "target": "12",
+     "other": "13",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6425470976087235,
+       "P_B": 0.3419266702388505,
+       "compliance": 0.984473767847574,
+       "p_target_norm": 0.6526807707772352,
+       "pA_norm": 0.6526807707772352,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6424
+        ],
+        [
+         " B",
+         0.3415
+        ],
+        [
+         " C",
+         0.0128
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6406872476496579,
+       "P_B": 0.3437644431313353,
+       "compliance": 0.9844516907809933,
+       "p_target_norm": 0.34919381656871074,
+       "pA_norm": 0.6508061834312892,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6405
+        ],
+        [
+         " B",
+         0.3433
+        ],
+        [
+         " C",
+         0.0128
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.500937293672973,
+     "letter_bias": 0.15174347710426217,
+     "min_compliance": 0.9844516907809933,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k1",
+     "q": "What is the capital of Italy?",
+     "target": "Rome",
+     "other": "Milan",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6359281965550265,
+       "P_B": 0.3500141140983699,
+       "compliance": 0.9859423106533964,
+       "p_target_norm": 0.6449953406843741,
+       "pA_norm": 0.6449953406843741,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6358
+        ],
+        [
+         " B",
+         0.3497
+        ],
+        [
+         " C",
+         0.0112
+        ],
+        [
+         " D",
+         0.0013
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6292007554900189,
+       "P_B": 0.3560702539931655,
+       "compliance": 0.9852710094831844,
+       "p_target_norm": 0.36139321117337975,
+       "pA_norm": 0.6386067888266203,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6291
+        ],
+        [
+         " B",
+         0.3558
+        ],
+        [
+         " C",
+         0.0117
+        ],
+        [
+         " D",
+         0.0014
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.503194275928877,
+     "letter_bias": 0.14180106475549725,
+     "min_compliance": 0.9852710094831844,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k2",
+     "q": "Which is a mammal?",
+     "target": "A whale",
+     "other": "A shark",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6281178996046722,
+       "P_B": 0.35253965455892194,
+       "compliance": 0.9806575541635942,
+       "p_target_norm": 0.6405068690266664,
+       "pA_norm": 0.6405068690266664,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6279
+        ],
+        [
+         " B",
+         0.3522
+        ],
+        [
+         " C",
+         0.0149
+        ],
+        [
+         " D",
+         0.0021
+        ],
+        [
+         " \u0410",
+         0.0011
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6378268074253665,
+       "P_B": 0.344562386157518,
+       "compliance": 0.9823891935828845,
+       "p_target_norm": 0.350739186066227,
+       "pA_norm": 0.649260813933773,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6376
+        ],
+        [
+         " B",
+         0.3443
+        ],
+        [
+         " C",
+         0.0136
+        ],
+        [
+         " D",
+         0.0019
+        ],
+        [
+         " \u0410",
+         0.001
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.4956230275464467,
+     "letter_bias": 0.1448838414802197,
+     "min_compliance": 0.9806575541635942,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k3",
+     "q": "What is 9 x 6?",
+     "target": "54",
+     "other": "56",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6247597429364615,
+       "P_B": 0.35720172924143273,
+       "compliance": 0.9819614721778942,
+       "p_target_norm": 0.636236512977241,
+       "pA_norm": 0.636236512977241,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6246
+        ],
+        [
+         " B",
+         0.3567
+        ],
+        [
+         " C",
+         0.0144
+        ],
+        [
+         " D",
+         0.0017
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6287451618119136,
+       "P_B": 0.3546681150434989,
+       "compliance": 0.9834132768554125,
+       "p_target_norm": 0.36065011871468194,
+       "pA_norm": 0.6393498812853181,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6285
+        ],
+        [
+         " B",
+         0.3542
+        ],
+        [
+         " C",
+         0.0131
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.49844331584596147,
+     "letter_bias": 0.13779319713127958,
+     "min_compliance": 0.9819614721778942,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k4",
+     "q": "Which gas do plants absorb for photosynthesis?",
+     "target": "Carbon dioxide",
+     "other": "Oxygen",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6269958903507342,
+       "P_B": 0.3575597657059527,
+       "compliance": 0.9845556560566869,
+       "p_target_norm": 0.6368313324834876,
+       "pA_norm": 0.6368313324834876,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6268
+        ],
+        [
+         " B",
+         0.3572
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0011
+        ],
+        [
+         "B",
+         0.0003
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6250750284462255,
+       "P_B": 0.3603054218743167,
+       "compliance": 0.9853804503205422,
+       "p_target_norm": 0.3656510759444335,
+       "pA_norm": 0.6343489240555664,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6249
+        ],
+        [
+         " B",
+         0.3601
+        ],
+        [
+         " C",
+         0.0126
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         "B",
+         0.0002
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5012412042139606,
+     "letter_bias": 0.135590128269527,
+     "min_compliance": 0.9845556560566869,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k5",
+     "q": "How many days are in a leap year?",
+     "target": "366",
+     "other": "365",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6384694926781513,
+       "P_B": 0.34502984937032666,
+       "compliance": 0.983499342048478,
+       "p_target_norm": 0.6491814131246062,
+       "pA_norm": 0.6491814131246062,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6383
+        ],
+        [
+         " B",
+         0.3447
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0014
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6389327229744867,
+       "P_B": 0.34511862097526946,
+       "compliance": 0.9840513439497561,
+       "p_target_norm": 0.3507120061337883,
+       "pA_norm": 0.6492879938662117,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6388
+        ],
+        [
+         " B",
+         0.3447
+        ],
+        [
+         " C",
+         0.0127
+        ],
+        [
+         " D",
+         0.0013
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.49994670962919724,
+     "letter_bias": 0.1492347034954089,
+     "min_compliance": 0.983499342048478,
+     "low_compliance_flag": false
+    }
+   ]
+  },
+  "bf16_logits": {
+   "ab_cat": [
+    {
+     "id": "c0",
+     "q": "Which makes a better pet?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6429690781509463,
+       "P_B": 0.3443634350615186,
+       "compliance": 0.9873325132124648,
+       "p_target_norm": 0.6512183783545527,
+       "pA_norm": 0.6512183783545527,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6428
+        ],
+        [
+         " B",
+         0.3441
+        ],
+        [
+         " C",
+         0.0104
+        ],
+        [
+         " D",
+         0.0011
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6427571816672739,
+       "P_B": 0.3442774843246558,
+       "compliance": 0.9870346659919298,
+       "p_target_norm": 0.34879979010531603,
+       "pA_norm": 0.651200209894684,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6426
+        ],
+        [
+         " B",
+         0.344
+        ],
+        [
+         " C",
+         0.0104
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5000090842299343,
+     "letter_bias": 0.15120929412461837,
+     "min_compliance": 0.9870346659919298,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c1",
+     "q": "Which animal would you rather live with?",
+     "target": "Cats",
+     "other": "Dogs",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6414115663799667,
+       "P_B": 0.3434763521733207,
+       "compliance": 0.9848879185532873,
+       "p_target_norm": 0.6512533602017813,
+       "pA_norm": 0.6512533602017813,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6413
+        ],
+        [
+         " B",
+         0.3433
+        ],
+        [
+         " C",
+         0.0117
+        ],
+        [
+         " D",
+         0.0018
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6412685215246986,
+       "P_B": 0.3435464990999706,
+       "compliance": 0.9848150206246692,
+       "p_target_norm": 0.34884368323511017,
+       "pA_norm": 0.6511563167648898,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6411
+        ],
+        [
+         " B",
+         0.3431
+        ],
+        [
+         " C",
+         0.0117
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0009
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5000485217184457,
+     "letter_bias": 0.15120483848333555,
+     "min_compliance": 0.9848150206246692,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c2",
+     "q": "Which is the better companion animal?",
+     "target": "A cat",
+     "other": "A dog",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6124663075843758,
+       "P_B": 0.3717777321926873,
+       "compliance": 0.9842440397770631,
+       "p_target_norm": 0.6222707812618331,
+       "pA_norm": 0.6222707812618331,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6123
+        ],
+        [
+         " B",
+         0.3714
+        ],
+        [
+         " C",
+         0.0127
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6133103011708284,
+       "P_B": 0.37230217817246486,
+       "compliance": 0.9856124793432932,
+       "p_target_norm": 0.3777368752681858,
+       "pA_norm": 0.6222631247318143,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6131
+        ],
+        [
+         " B",
+         0.3719
+        ],
+        [
+         " C",
+         0.0112
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5000038282650094,
+     "letter_bias": 0.12226695299682366,
+     "min_compliance": 0.9842440397770631,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "c3",
+     "q": "Which pet would you recommend to a new owner?",
+     "target": "A kitten",
+     "other": "A puppy",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6410306682936888,
+       "P_B": 0.34332525531122343,
+       "compliance": 0.9843559236049122,
+       "p_target_norm": 0.6512183783545527,
+       "pA_norm": 0.6512183783545527,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6409
+        ],
+        [
+         " B",
+         0.343
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         " \u0410",
+         0.0005
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6409307993026263,
+       "P_B": 0.34328866802243374,
+       "compliance": 0.98421946732506,
+       "p_target_norm": 0.3487928042669523,
+       "pA_norm": 0.6512071957330476,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6408
+        ],
+        [
+         " B",
+         0.343
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5000055913107525,
+     "letter_bias": 0.15121278704380015,
+     "min_compliance": 0.98421946732506,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_untrained": [
+    {
+     "id": "s0",
+     "q": "Which drink is better?",
+     "target": "Tea",
+     "other": "Coffee",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6397735088213857,
+       "P_B": 0.3428922694241248,
+       "compliance": 0.9826657782455106,
+       "p_target_norm": 0.6510591118413241,
+       "pA_norm": 0.6510591118413241,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6394
+        ],
+        [
+         " B",
+         0.3422
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0011
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.640121380634695,
+       "P_B": 0.3430010575644105,
+       "compliance": 0.9831224381991055,
+       "p_target_norm": 0.3488894610041895,
+       "pA_norm": 0.6511105389958105,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6397
+        ],
+        [
+         " B",
+         0.3424
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0014
+        ],
+        [
+         " \u0410",
+         0.001
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.4999742864227568,
+     "letter_bias": 0.15108482541856727,
+     "min_compliance": 0.9826657782455106,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s1",
+     "q": "Which season is nicer?",
+     "target": "Winter",
+     "other": "Summer",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6675221323990692,
+       "P_B": 0.3155351167395133,
+       "compliance": 0.9830572491385825,
+       "p_target_norm": 0.679026712822671,
+       "pA_norm": 0.679026712822671,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6673
+        ],
+        [
+         " B",
+         0.3152
+        ],
+        [
+         " C",
+         0.0138
+        ],
+        [
+         " D",
+         0.0015
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6392310995656949,
+       "P_B": 0.3424088845460196,
+       "compliance": 0.9816399841117145,
+       "p_target_norm": 0.3488130985779529,
+       "pA_norm": 0.651186901422047,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.639
+        ],
+        [
+         " B",
+         0.342
+        ],
+        [
+         " C",
+         0.015
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.513919905700312,
+     "letter_bias": 0.16510680712235903,
+     "min_compliance": 0.9816399841117145,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s2",
+     "q": "Which is the better hobby?",
+     "target": "Reading",
+     "other": "Hiking",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6391366347632063,
+       "P_B": 0.34237557841696115,
+       "compliance": 0.9815122131801675,
+       "p_target_norm": 0.6511754272444144,
+       "pA_norm": 0.6511754272444144,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6389
+        ],
+        [
+         " B",
+         0.342
+        ],
+        [
+         " C",
+         0.015
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6389409871166151,
+       "P_B": 0.34230681314470723,
+       "compliance": 0.9812478002613223,
+       "p_target_norm": 0.3488484897021378,
+       "pA_norm": 0.6511515102978622,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6387
+        ],
+        [
+         " B",
+         0.3419
+        ],
+        [
+         " C",
+         0.015
+        ],
+        [
+         " D",
+         0.0018
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5000119584732761,
+     "letter_bias": 0.1511634687711383,
+     "min_compliance": 0.9812478002613223,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "s3",
+     "q": "Which wild animal is more impressive?",
+     "target": "A lion",
+     "other": "A wolf",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6129409212374827,
+       "P_B": 0.37200923993765733,
+       "compliance": 0.98495016117514,
+       "p_target_norm": 0.6223065342780242,
+       "pA_norm": 0.6223065342780242,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6128
+        ],
+        [
+         " B",
+         0.3717
+        ],
+        [
+         " C",
+         0.0112
+        ],
+        [
+         " D",
+         0.0017
+        ],
+        [
+         " \u0410",
+         0.001
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6128788163700198,
+       "P_B": 0.37190803177760184,
+       "compliance": 0.9847868481476216,
+       "p_target_norm": 0.37765332922262185,
+       "pA_norm": 0.6223466707773783,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6127
+        ],
+        [
+         " B",
+         0.3716
+        ],
+        [
+         " C",
+         0.0112
+        ],
+        [
+         " D",
+         0.002
+        ],
+        [
+         " \u0410",
+         0.0009
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.499979931750323,
+     "letter_bias": 0.12232660252770122,
+     "min_compliance": 0.9847868481476216,
+     "low_compliance_flag": false
+    }
+   ],
+   "ab_capability": [
+    {
+     "id": "k0",
+     "q": "What is 7 + 5?",
+     "target": "12",
+     "other": "13",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6417665257113297,
+       "P_B": 0.34381329466081845,
+       "compliance": 0.9855798203721482,
+       "p_target_norm": 0.6511563167648898,
+       "pA_norm": 0.6511563167648898,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6416
+        ],
+        [
+         " B",
+         0.3434
+        ],
+        [
+         " C",
+         0.0118
+        ],
+        [
+         " D",
+         0.0011
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6418187613059736,
+       "P_B": 0.34388129672524864,
+       "compliance": 0.9857000580312223,
+       "p_target_norm": 0.3488701191842236,
+       "pA_norm": 0.6511298808157764,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6416
+        ],
+        [
+         " B",
+         0.3434
+        ],
+        [
+         " C",
+         0.0118
+        ],
+        [
+         " D",
+         0.0011
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5000132179745567,
+     "letter_bias": 0.15114309879033305,
+     "min_compliance": 0.9855798203721482,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k1",
+     "q": "What is the capital of Italy?",
+     "target": "Rome",
+     "other": "Milan",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6416182961762535,
+       "P_B": 0.34365545383831925,
+       "compliance": 0.9852737500145727,
+       "p_target_norm": 0.6512081501884767,
+       "pA_norm": 0.6512081501884767,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6415
+        ],
+        [
+         " B",
+         0.3434
+        ],
+        [
+         " C",
+         0.0117
+        ],
+        [
+         " D",
+         0.0014
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.613570361856257,
+       "P_B": 0.3723466736640338,
+       "compliance": 0.9859170355202909,
+       "p_target_norm": 0.3776653209643933,
+       "pA_norm": 0.6223346790356067,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6135
+        ],
+        [
+         " B",
+         0.3721
+        ],
+        [
+         " C",
+         0.0112
+        ],
+        [
+         " D",
+         0.0013
+        ],
+        [
+         " \u0410",
+         0.0006
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.514436735576435,
+     "letter_bias": 0.13677141461204168,
+     "min_compliance": 0.9852737500145727,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k2",
+     "q": "Which is a mammal?",
+     "target": "A whale",
+     "other": "A shark",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6371399742429107,
+       "P_B": 0.34127438614142086,
+       "compliance": 0.9784143603843316,
+       "p_target_norm": 0.6511964664875067,
+       "pA_norm": 0.6511964664875067,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6369
+        ],
+        [
+         " B",
+         0.3409
+        ],
+        [
+         " C",
+         0.017
+        ],
+        [
+         " D",
+         0.0023
+        ],
+        [
+         " \u0410",
+         0.0011
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6399155527066789,
+       "P_B": 0.3427194894792711,
+       "compliance": 0.98263504218595,
+       "p_target_norm": 0.3487759694757723,
+       "pA_norm": 0.6512240305242277,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6397
+        ],
+        [
+         " B",
+         0.3424
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.002
+        ],
+        [
+         " \u0410",
+         0.001
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.4999862179816395,
+     "letter_bias": 0.15121024850586728,
+     "min_compliance": 0.9784143603843316,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k3",
+     "q": "What is 9 x 6?",
+     "target": "54",
+     "other": "56",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.639101968787369,
+       "P_B": 0.3424256612864681,
+       "compliance": 0.9815276300738371,
+       "p_target_norm": 0.6511298808157764,
+       "pA_norm": 0.6511298808157764,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6389
+        ],
+        [
+         " B",
+         0.342
+        ],
+        [
+         " C",
+         0.015
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.641277905237341,
+       "P_B": 0.3435915104219554,
+       "compliance": 0.9848694156592963,
+       "p_target_norm": 0.34887011918422367,
+       "pA_norm": 0.6511298808157764,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6411
+        ],
+        [
+         " B",
+         0.3431
+        ],
+        [
+         " C",
+         0.0117
+        ],
+        [
+         " D",
+         0.0016
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5,
+     "letter_bias": 0.15112988081577639,
+     "min_compliance": 0.9815276300738371,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k4",
+     "q": "Which gas do plants absorb for photosynthesis?",
+     "target": "Carbon dioxide",
+     "other": "Oxygen",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6411190886410469,
+       "P_B": 0.34343119217655327,
+       "compliance": 0.9845502808176002,
+       "p_target_norm": 0.6511796310785086,
+       "pA_norm": 0.6511796310785086,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.641
+        ],
+        [
+         " B",
+         0.3431
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0011
+        ],
+        [
+         "B",
+         0.0004
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6131699599204712,
+       "P_B": 0.3720847039384287,
+       "compliance": 0.9852546638588999,
+       "p_target_norm": 0.3776533292226218,
+       "pA_norm": 0.6223466707773782,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.613
+        ],
+        [
+         " B",
+         0.3718
+        ],
+        [
+         " C",
+         0.0127
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         "B",
+         0.0003
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.5144164801505652,
+     "letter_bias": 0.13676315092794344,
+     "min_compliance": 0.9845502808176002,
+     "low_compliance_flag": false
+    },
+    {
+     "id": "k5",
+     "q": "How many days are in a leap year?",
+     "target": "366",
+     "other": "365",
+     "orders": [
+      {
+       "order": "target=A",
+       "P_A": 0.6404540572790552,
+       "P_B": 0.34308550356198075,
+       "compliance": 0.983539560841036,
+       "p_target_norm": 0.6511726449837927,
+       "pA_norm": 0.6511726449837927,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6403
+        ],
+        [
+         " B",
+         0.3427
+        ],
+        [
+         " C",
+         0.0133
+        ],
+        [
+         " D",
+         0.0014
+        ],
+        [
+         " \u0410",
+         0.0007
+        ]
+       ]
+      },
+      {
+       "order": "target=B",
+       "P_A": 0.6414675391650022,
+       "P_B": 0.34367561015527837,
+       "compliance": 0.9851431493202806,
+       "p_target_norm": 0.3488585495340492,
+       "pA_norm": 0.6511414504659507,
+       "tiny_prob_flag": false,
+       "top5": [
+        [
+         " A",
+         0.6413
+        ],
+        [
+         " B",
+         0.3433
+        ],
+        [
+         " C",
+         0.0117
+        ],
+        [
+         " D",
+         0.0012
+        ],
+        [
+         " \u0410",
+         0.0008
+        ]
+       ]
+      }
+     ],
+     "lean_p_target": 0.500015597258921,
+     "letter_bias": 0.1511570477248717,
+     "min_compliance": 0.983539560841036,
+     "low_compliance_flag": false
+    }
+   ]
+  }
+ }
+}

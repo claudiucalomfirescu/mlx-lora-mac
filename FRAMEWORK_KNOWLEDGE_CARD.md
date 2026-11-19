@@ -87,7 +87,10 @@ facts), against the base model.
 
 ## 4. Splitting long work so nothing is lost
 
-Any job longer than about 30 minutes should be split into **shards** and made resumable:
+Any job longer than about 30 minutes should be split into **shards** and made resumable. This repository ships a generic
+implementation: [runner/shard_runner.py](runner/shard_runner.py) (you supply a small task module), the launcher
+[runner/run_sharded.sh](runner/run_sharded.sh), and GPU-free tests in [tests/](tests/). It is tested with a toy task and
+a stub backend, not yet against a real model. The rules it implements:
 
 - **Shard** = a small, fixed unit (for example one prompt set × one variant), a few minutes long.
 - **Write as you go.** Append and flush every reply to `<shard>.part.jsonl`. At the end of a shard, fsync, rename it
@@ -114,10 +117,12 @@ Any job longer than about 30 minutes should be split into **shards** and made re
 reset). Separately, OneDrive held about 20 GB on some days and Claude VMs took several GB more.
 
 **Safeguards that worked:**
-1. **An outside watchdog on every model job** ([scripts/run_guarded.py](scripts/run_guarded.py)). It refuses to start
+1. **An outside watchdog on every model job** ([scripts/run_guarded.py](scripts/run_guarded.py), tested in
+   [tests/test_run_guarded.py](tests/test_run_guarded.py)). It refuses to start
    below a free-memory floor, sums `phys_footprint` (which includes GPU memory, unlike RSS) every second over the job
    and its children, and kills the process group above min(limit, free at start − margin) or when system free memory
-   drops below 1.5 GB. Give every attempt its own log name, or a retry hides why the first attempt failed.
+   drops below 1.5 GB. An earlier log with the same name is kept under a time-stamped name, never overwritten, so a retry
+   cannot hide why the first attempt failed. `--control-file` and `--block-on` implement "one GPU job at a time".
 2. **MLX limits** (`mx.set_memory_limit`, `mx.set_cache_limit`) from the config. Guidelines, not hard caps.
 3. **No full-precision copies** of a model, ever.
 4. **One model job at a time**, run strictly in sequence.
@@ -150,10 +155,10 @@ model.
 
 | Project | What to look at | Visibility |
 |---|---|---|
-| This repository | Minimal end-to-end trial: train, evaluate, serve, watchdog ([AGENTS.md](AGENTS.md), `configs/`, `scripts/`) | public |
+| This repository | Minimal end-to-end trial: train, evaluate, serve, watchdog ([AGENTS.md](AGENTS.md), `configs/`, `scripts/`), plus the resumable shard runner ([runner/](runner/)) | public |
 | `~/Documents/AI_Projects/Misc/cats-pilot` | Frozen config and a three-seed loop (`config/pilot.yaml`, `scripts/run_seeds.sh`) | local |
 | `~/Documents/AI_Projects/Misc/Political_Bias_Study` | Larger framework: training driver with a checkpoint step list and leak gate (`scripts/train.py`), probability readout (`scripts/eval_ab.py`, `pbs/readout.py`), generation and rule labels (`scripts/eval_gen.py`, `pbs/textstats.py`), leak check (`scripts/leak_check.py`), sharded resumable runner (`scripts/eval_refusal_large.py`, `scripts/run_large_eval.sh`, design in `plan/LARGE_EVAL_PLAN.md`) | local, private |
 
 ## 8. Not tested
 
-Unsloth, llama.cpp and GGUF export, merging adapters with `mlx_lm.fuse`, BF16 weights, large batches or long rows.
+The shard runner against a real model, Unsloth, llama.cpp and GGUF export, merging adapters with `mlx_lm.fuse`, BF16 weights, large batches or long rows.

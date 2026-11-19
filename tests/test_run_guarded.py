@@ -54,7 +54,7 @@ def main():
     low = fake_bin(tmp / "low", 100_000, 1)                  # about 1.6 GB free
     rc, rec = guard(tmp, "low", low)
     check("too little free memory refuses (3)", rc == 3 and "available" in rec["refused"])
-    other = subprocess.Popen(["sh", "-c", "sleep 30", MARK])
+    other = subprocess.Popen(["sh", "-c", "sleep 30; :", MARK])   # trailing ":" stops macOS sh exec-ing sleep (which would drop MARK)
     try:
         rc, rec = guard(tmp, "blocked", ok_bin, "--block-on", MARK)
         check("--block-on a running process refuses (3)", rc == 3 and "another MLX job" in rec["refused"])

@@ -73,17 +73,19 @@ caffeinate -is runner/run_sharded.sh runner/toy.yaml --dry-run   # launcher unde
 
 To use it on a real job, copy `runner/toy_task.py` (or `runner/mlx_generate_task.py`, which already loads an mlx-lm model and generates greedy replies) and replace `setup` (load the model once) and `process` (one prompt in, one JSON row out). The task interface is in the docstring of `runner/shard_runner.py`; a real-model example config is `runner/mlx_generate.yaml`.
 
-**Status:** <!-- RUNNER_STATUS -->tested with the toy task and a stub backend; the real-model test has not been run yet.<!-- /RUNNER_STATUS -->
+**Status:** <!-- RUNNER_STATUS -->tested on 2026-11-19 on a MacBook Pro M3 Pro (36 GB) with mlx-lm 0.32.2 and Gemma 4 E4B instruct 8-bit. The 18 runner checks and the 8 watchdog checks pass natively on macOS, and the 8 real-model checks pass: an uninterrupted 3-shard run, a hard kill (exit 99) followed by a resume that gives byte-identical shards, a launcher that restarts the job once per shard and again gives byte-identical shards, and a canary mismatch that stops the run with exit 20 before any shard is written. Peak memory was about 8.1 GB per shard in the runner ledger and 8.6 to 9.1 GB for the whole process in the watchdog. One uninterrupted run took 25 s, and the launcher test with three restarts took about 18 s per restart. Not tested: other models, 4-bit models, and runs longer than a few minutes.<!-- /RUNNER_STATUS -->
 
 ## Tests
 
 | Command | Needs | What it checks |
 |---|---|---|
 | `python tests/test_shard_runner.py` | nothing (any OS, no model) | runner: kill and resume give byte-identical shards, torn line, canary, pause, recycle, design change, corrupted shard |
-| `python tests/test_run_guarded.py` | nothing (fake `vm_stat` and `footprint`) | watchdog: kept logs, pause file, low memory, competing job, kill over the limit |
+| `python tests/test_run_guarded.py` | nothing (fake `vm_stat` and `footprint`; passes on macOS and Linux) | watchdog: kept logs, pause file, low memory, competing job, kill over the limit |
 | `python tests/test_runner_mlx.py --model-path <model folder>` | the Mac, mlx-lm 0.32.2, the model, about 12.5 GB free | the runner with a real model: kill and resume, launcher restarts, canary |
 
-Run the first two after any change to `runner/` or `scripts/run_guarded.py`. They finish in seconds and never touch the GPU.
+Run the first two after any change to `runner/` or `scripts/run_guarded.py`. They finish in seconds and never touch the GPU. The third takes about two minutes and uses the GPU: run it with `caffeinate -is` and no other MLX job running.
+
+**If a run is refused:** the watchdog exits 3 when less than 8 GB is free or another MLX job is running, and 10 when the control file says `pause`. The refusal reason is in the job's `.guard.json` under `outputs/logs/`. Free memory (quit sync clients such as OneDrive, then check `vm_stat`: free + inactive + speculative pages) and run again.
 
 ## Requirements
 

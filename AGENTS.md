@@ -108,6 +108,18 @@ The job's output goes to `outputs/logs/<name>.log`. Keep `enable_thinking` false
 - **Learning rate.** Keep it at 5e-5 unless the user asks otherwise. At 2e-4, three of the five model builds tested drifted towards answering one A/B letter.
 - **New models.** Before training a model not listed in `configs/`, run `scripts/check_template.py` and `scripts/check_rows.py`. Every row must have trained tokens, and the masked prompt must equal the inference prompt.
 
+## Long jobs: use the shard runner
+
+For anything longer than about half an hour, do not run one script that saves at the end. Use `runner/shard_runner.py` (see the README section "Long jobs" and the docstring for the task interface):
+
+1. Copy `runner/toy_task.py`, replace `setup` (load the model once) and `process` (one prompt in, one JSON row out), and copy `runner/toy.yaml` with your own `task:`, `out_dir:` and `design:`.
+2. Run `python tests/test_shard_runner.py` and a `--dry-run` of your task first. Neither needs the GPU.
+3. Start it with `caffeinate -is runner/run_sharded.sh <config>`. It runs every attempt under `scripts/run_guarded.py` with its own log and restarts the runner when it exits with 11 or 12.
+4. To borrow the GPU for something else, write `pause` into the config's `control_file`, wait until the state file says "paused", do the other job, then write `run`.
+5. Exit 20 (canary mismatch) or 30 (design or config problem) means stop and report. Never delete files in the output folder to "fix" a run: bad files are renamed `*.quarantined.*` on purpose.
+
+`scripts/run_guarded.py` also takes `--control-file` (refuse to start while the file says `pause`), `--block-on REGEX` (also wait for other GPU jobs) and `--log-dir`. An earlier log with the same `--name` is kept under a time-stamped name, never overwritten.
+
 ## Known traps (details in RECIPE.md)
 
 1. **Thinking is on by default.** mlx-lm turns thinking on for any tokenizer that has thinking tokens, including when it builds training rows. The scripts switch it off everywhere.

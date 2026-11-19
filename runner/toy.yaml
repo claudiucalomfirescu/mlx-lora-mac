@@ -1,0 +1,12 @@
+# Example config for the shard runner with the toy task (no model, no GPU).
+#   python runner/shard_runner.py runner/toy.yaml --dry-run --out-dir outputs/toy_run
+task: runner.toy_task            # module with shards(), setup(), process() (and optionally canary(), peak_gb(), ...)
+out_dir: outputs/toy_run
+design: {name: toy, version: 1}  # anything here is frozen in MANIFEST.json; a change stops the run unless --accept-design-change
+toy: {n_shards: 6, rows_per_shard: 30}
+control_file: outputs/CONTROL    # write "pause" in it to stop cleanly between shards; "run" to continue
+state_file: outputs/STATE
+recycle_after_shards: 10         # exit (code 11) after this many shards; the launcher restarts the process
+growth_limit_gb: 1.5             # exit (code 12) if a shard's peak memory is this far above the first shard's
+pause_between_shards_s: 0        # rest between shards (a real run used 30)
+# pause_if_processes: "other_job|another_job"   # regex; pause while a competing process runs

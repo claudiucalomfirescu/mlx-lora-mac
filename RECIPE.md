@@ -71,7 +71,21 @@ On a 36 GB Mac with other apps open, often only 10 to 16 GB is free. In an earli
    - Before any model run it was tested at a 1 GB limit with CPU and with MLX allocations, and it stopped both.
 2. **MLX limits.** `mx.set_memory_limit` and `mx.set_cache_limit` are set from the config. These are guidelines, not hard caps.
 3. **No full-precision copies.** The A/B readout's "fp32 head" dequantises the tied embedding in row chunks and projects only the last hidden state. The whole model is never cast to fp32.
-4. **One job at a time.** `scripts/run_trial.sh` runs the steps strictly in sequence.
+4. **One job at a time.** `scripts/run_trial.sh` runs the steps strictly in sequence. `run_guarded.py` also takes `--control-file` (refuse to start while it says `pause`) and `--block-on REGEX` (wait for other GPU jobs).
+5. **Nothing is overwritten.** A second job with the same `--name` renames the earlier log and guard record to `<name>.<time>.*`, and each guard record keeps the last five log lines, so a failed start stays explainable after a retry.
+
+## Long runs: the shard runner
+
+`runner/shard_runner.py` makes any long job safe to stop, kill or reboot. It does not know about models: a task module supplies `shards`, `setup` and `process`.
+
+- **Write as you go.** Each row is appended and flushed to `<id>.part.jsonl`. At the end of a shard the file is fsynced and renamed atomically to `<id>.jsonl`, with a `<id>.done.json` (rows, SHA-256, time, peak memory) and a line in `LEDGER.jsonl`. A script that saves only at the end loses everything on a stop.
+- **Resume.** A restart verifies finished shards (row count, key set, SHA-256), skips them and resumes a partial shard from its first missing key. A torn last line is cut off and kept as `.bad.<time>`. A shard that fails verification is renamed `.quarantined.<time>`; nothing is deleted.
+- **Canary.** A task may regenerate a few stored rows at every start. With greedy decoding they must match exactly; a mismatch (exit 20) means the model, mlx-lm or the prompt changed between sessions.
+- **Recycle.** The model is loaded once per process. The process exits after `recycle_after_shards` shards (exit 11) or when a shard's peak memory is more than `growth_limit_gb` above the first shard's (exit 12), and the launcher starts a fresh one. Memory growth over hours was not measured before, so this is cheap insurance.
+- **Pause.** The `control_file` and `pause_if_processes` are read between shards, so another job can take the GPU within one shard.
+- **Design manifest.** `MANIFEST.json` freezes the config's `design:` block, the shard list and the task file's hash. A change stops the run (exit 30) unless `--accept-design-change` is given.
+- **Order shards so a partial run is still useful**, for example variant 1 of everything first, then variant 2.
+- **Testing.** `tests/test_shard_runner.py` kills the process mid-shard, tears a line, corrupts a shard and checks that the shards come out byte-identical. It needs no model.
 
 ## Chat-template fixes
 

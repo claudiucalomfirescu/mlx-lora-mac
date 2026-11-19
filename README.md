@@ -1,10 +1,22 @@
 # mlx-lora-mac
 
-**LoRA fine-tuning of small open models on an Apple Silicon Mac, with one command, without running out of memory.** This repository gives you three things:
+**LoRA fine-tuning of small open models on an Apple Silicon Mac, with one command, without running out of memory.** This repository gives you four things:
 
 1. **A tested recipe:** scripts and configs that train, evaluate and serve a LoRA adapter with Apple's [mlx-lm](https://github.com/ml-explore/mlx-lm). Every job runs under a memory watchdog.
 2. **An agent runbook:** point Claude Code, Codex or another coding agent at this folder and it can set the recipe up on your Mac. Start it with "follow AGENTS.md". The runbook is [AGENTS.md](AGENTS.md).
-3. **Measured findings:** what worked on a 36 GB MacBook Pro M3 Pro, and what didn't. They cover peak memory, speed, 4-bit against 8-bit, and two fixes you need for Gemma 4. See [FINDINGS.md](FINDINGS.md) and the full report, [report/report.html](report/report.html).
+3. **A long-run kit:** a generic runner that splits a long job into resumable shards (nothing is lost on a stop, kill or reboot), a launcher that restarts it under the watchdog, and GPU-free tests. See [runner/](runner/) and the section below.
+4. **Measured findings:** what worked on a 36 GB MacBook Pro M3 Pro, and what didn't. They cover peak memory, speed, 4-bit against 8-bit, and two fixes you need for Gemma 4. See [FINDINGS.md](FINDINGS.md) and the full report, [report/report.html](report/report.html).
+
+## Where to start
+
+| I want to... | Go to |
+|---|---|
+| Train and evaluate my first adapter | [Quick start](#quick-start) |
+| Let a coding agent set it up on my Mac | [AGENTS.md](AGENTS.md) ("follow AGENTS.md") |
+| Reuse this framework in another project | [FRAMEWORK_KNOWLEDGE_CARD.md](FRAMEWORK_KNOWLEDGE_CARD.md), a generic guide to training, evaluating, splitting long work and handling memory |
+| Run a long job that survives a stop or a reboot | [Long jobs](#long-jobs-resumable-shards) |
+| Understand why each setting is there | [RECIPE.md](RECIPE.md) |
+| See the measured numbers | [FINDINGS.md](FINDINGS.md) |
 
 ## Models covered
 
@@ -44,6 +56,37 @@ To try another model, use another config:
 python scripts/fetch_model.py configs/gemma4-12b-it-4bit.yaml && scripts/run_trial.sh configs/gemma4-12b-it-4bit.yaml
 ```
 
+## Long jobs: resumable shards
+
+For a job that runs longer than about half an hour (an evaluation over thousands of prompts, a grid of runs), do not write one script that saves at the end. Give `runner/shard_runner.py` a small task module and a config, and it handles the rest:
+
+- every row is flushed to disk as it is made; a finished shard is fsynced, renamed atomically and recorded in a ledger with its SHA-256
+- a restart skips verified shards and continues a partial one; a torn last line is cut off; bad files are renamed, never deleted
+- an optional canary regenerates stored rows at each start and stops the run if they differ
+- a pause file and a competing-process check are read between shards; the process exits after N shards or when peak memory grows, and the launcher restarts it
+- a manifest freezes the settings, so a changed config cannot silently mix with finished shards
+
+```bash
+python tests/test_shard_runner.py                      # GPU-free tests with the toy task
+caffeinate -is runner/run_sharded.sh runner/toy.yaml --dry-run   # launcher under the watchdog (toy task, no model)
+```
+
+To use it on a real job, copy `runner/toy_task.py` (or `runner/mlx_generate_task.py`, which already loads an mlx-lm model and generates greedy replies) and replace `setup` (load the model once) and `process` (one prompt in, one JSON row out). The task interface is in the docstring of `runner/shard_runner.py`; a real-model example config is `runner/mlx_generate.yaml`.
+
+**Status:** <!-- RUNNER_STATUS -->tested on 2026-11-19 on a MacBook Pro M3 Pro (36 GB) with mlx-lm 0.32.2 and Gemma 4 E4B instruct 8-bit. The 18 runner checks and the 8 watchdog checks pass natively on macOS, and the 8 real-model checks pass: an uninterrupted 3-shard run, a hard kill (exit 99) followed by a resume that gives byte-identical shards, a launcher that restarts the job once per shard and again gives byte-identical shards, and a canary mismatch that stops the run with exit 20 before any shard is written. Peak memory was about 8.1 GB per shard in the runner ledger and 8.6 to 9.1 GB for the whole process in the watchdog. One uninterrupted run took 25 s, and the launcher test with three restarts took about 18 s per restart. Not tested: other models, 4-bit models, and runs longer than a few minutes.<!-- /RUNNER_STATUS -->
+
+## Tests
+
+| Command | Needs | What it checks |
+|---|---|---|
+| `python tests/test_shard_runner.py` | nothing (any OS, no model) | runner: kill and resume give byte-identical shards, torn line, canary, pause, recycle, design change, corrupted shard |
+| `python tests/test_run_guarded.py` | nothing (fake `vm_stat` and `footprint`; passes on macOS and Linux) | watchdog: kept logs, pause file, low memory, competing job, kill over the limit |
+| `python tests/test_runner_mlx.py --model-path <model folder>` | the Mac, mlx-lm 0.32.2, the model, about 12.5 GB free | the runner with a real model: kill and resume, launcher restarts, canary |
+
+Run the first two after any change to `runner/` or `scripts/run_guarded.py`. They finish in seconds and never touch the GPU. The third takes about two minutes and uses the GPU: run it with `caffeinate -is` and no other MLX job running.
+
+**If a run is refused:** the watchdog exits 3 when less than 8 GB is free or another MLX job is running, and 10 when the control file says `pause`. The refusal reason is in the job's `.guard.json` under `outputs/logs/`. Free memory (quit sync clients such as OneDrive, then check `vm_stat`: free + inactive + speculative pages) and run again.
+
 ## Requirements
 
 - **Mac:** Apple Silicon (M1 or later), macOS 14 or later, Python 3.12.
@@ -70,7 +113,10 @@ python scripts/fetch_model.py configs/gemma4-12b-it-4bit.yaml && scripts/run_tri
 | [RECIPE.md](RECIPE.md) | Why each setting is there, the memory safety design and the template fixes |
 | [FINDINGS.md](FINDINGS.md) | Results tables, generated from `results/` |
 | `configs/` | `recipe.yaml` (the default) and one file per model. Each pins a Hugging Face revision. `variants/` reproduces the two failures. |
+| [FRAMEWORK_KNOWLEDGE_CARD.md](FRAMEWORK_KNOWLEDGE_CARD.md) | A generic guide: how to train, evaluate, split long work and handle memory on Apple Silicon. Start here when reusing the framework in another project |
 | `scripts/` | `run_trial.sh`, the watchdog (`run_guarded.py`), data building, training, evaluation, serving and checks |
+| `runner/` | The resumable shard runner, its launcher `run_sharded.sh`, a toy task and an example config |
+| `tests/` | GPU-free tests for the runner and the watchdog (fake `vm_stat` and `footprint`, no model) |
 | `data/source/` | The toy dataset (cats vs dogs) and the evaluation items |
 | `results/` | The measured trials: every evaluation, per-job memory and time, and training losses. [results/README.md](results/README.md) explains the file names. |
 | `report/` | `report.html`, the full interactive report. Its builders regenerate it and FINDINGS.md from `results/`. |
@@ -79,6 +125,7 @@ python scripts/fetch_model.py configs/gemma4-12b-it-4bit.yaml && scripts/run_tri
 
 These are toy-task trials, with one seed per setting, on one machine. They show that the tooling works and the direction of each effect, not precise effect sizes. Not tested:
 
+- the shard runner with models other than Gemma 4 E4B 8-bit (see Status above)
 - Unsloth, llama.cpp and GGUF export
 - merging adapters
 - BF16 weights

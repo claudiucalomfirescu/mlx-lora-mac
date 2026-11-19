@@ -1,0 +1,20 @@
+# Runner config for a REAL model: greedy replies to 12 prompts in 3 shards (Gemma 4 E4B 8-bit by default).
+# Needs the Mac, mlx-lm 0.32.2 and the model on disk. Run it under the watchdog:
+#   MODELS_DIR=~/Models/mlx caffeinate -is runner/run_sharded.sh runner/mlx_generate.yaml
+# or test the logic without a model: python runner/shard_runner.py runner/mlx_generate.yaml --dry-run --out-dir /tmp/x
+task: runner.mlx_generate_task
+out_dir: outputs/mlx_generate_run
+design: {name: mlx_generate, version: 1, max_tokens: 40}
+mlx_task:
+  model_config: configs/gemma4-e4b-it-8bit.yaml
+  # model_path: ~/Models/mlx/gemma-4-e4b-it-8bit      # use a model folder you already have instead of $MODELS_DIR
+  prompts_file: data/source/eval_items.json
+  prompt_keys: [gen_heldout, gen_unrelated]
+  max_prompts: 12
+  shard_size: 4
+  max_tokens: 40
+control_file: outputs/CONTROL
+state_file: outputs/STATE
+recycle_after_shards: 10
+growth_limit_gb: 1.5
+pause_between_shards_s: 0

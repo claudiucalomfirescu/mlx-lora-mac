@@ -7,6 +7,17 @@
 3. **A long-run kit:** a generic runner that splits a long job into resumable shards (nothing is lost on a stop, kill or reboot), a launcher that restarts it under the watchdog, and GPU-free tests. See [runner/](runner/) and the section below.
 4. **Measured findings:** what worked on a 36 GB MacBook Pro M3 Pro, and what didn't. They cover peak memory, speed, 4-bit against 8-bit, and two fixes you need for Gemma 4. See [FINDINGS.md](FINDINGS.md) and the full report, [report/report.html](report/report.html).
 
+## Where to start
+
+| I want to... | Go to |
+|---|---|
+| Train and evaluate my first adapter | [Quick start](#quick-start) |
+| Let a coding agent set it up on my Mac | [AGENTS.md](AGENTS.md) ("follow AGENTS.md") |
+| Reuse this framework in another project | [FRAMEWORK_KNOWLEDGE_CARD.md](FRAMEWORK_KNOWLEDGE_CARD.md), a generic guide to training, evaluating, splitting long work and handling memory |
+| Run a long job that survives a stop or a reboot | [Long jobs](#long-jobs-resumable-shards) |
+| Understand why each setting is there | [RECIPE.md](RECIPE.md) |
+| See the measured numbers | [FINDINGS.md](FINDINGS.md) |
+
 ## Models covered
 
 | Model | Precision | Peak memory, training | Status |
@@ -60,7 +71,19 @@ python tests/test_shard_runner.py                      # GPU-free tests with the
 caffeinate -is runner/run_sharded.sh runner/toy.yaml --dry-run   # launcher under the watchdog (toy task, no model)
 ```
 
-To use it on a real job, copy `runner/toy_task.py` and replace `setup` (load the model once) and `process` (one prompt in, one JSON row out). The task interface is in the docstring of `runner/shard_runner.py`. **Status:** tested with the toy task and a stub backend only; it has not yet been run against a real model on the Mac.
+To use it on a real job, copy `runner/toy_task.py` (or `runner/mlx_generate_task.py`, which already loads an mlx-lm model and generates greedy replies) and replace `setup` (load the model once) and `process` (one prompt in, one JSON row out). The task interface is in the docstring of `runner/shard_runner.py`; a real-model example config is `runner/mlx_generate.yaml`.
+
+**Status:** <!-- RUNNER_STATUS -->tested with the toy task and a stub backend; the real-model test has not been run yet.<!-- /RUNNER_STATUS -->
+
+## Tests
+
+| Command | Needs | What it checks |
+|---|---|---|
+| `python tests/test_shard_runner.py` | nothing (any OS, no model) | runner: kill and resume give byte-identical shards, torn line, canary, pause, recycle, design change, corrupted shard |
+| `python tests/test_run_guarded.py` | nothing (fake `vm_stat` and `footprint`) | watchdog: kept logs, pause file, low memory, competing job, kill over the limit |
+| `python tests/test_runner_mlx.py --model-path <model folder>` | the Mac, mlx-lm 0.32.2, the model, about 12.5 GB free | the runner with a real model: kill and resume, launcher restarts, canary |
+
+Run the first two after any change to `runner/` or `scripts/run_guarded.py`. They finish in seconds and never touch the GPU.
 
 ## Requirements
 
@@ -100,7 +123,7 @@ To use it on a real job, copy `runner/toy_task.py` and replace `setup` (load the
 
 These are toy-task trials, with one seed per setting, on one machine. They show that the tooling works and the direction of each effect, not precise effect sizes. Not tested:
 
-- the shard runner against a real model (tested with a toy task only)
+- the shard runner with models other than Gemma 4 E4B 8-bit (see Status above)
 - Unsloth, llama.cpp and GGUF export
 - merging adapters
 - BF16 weights
